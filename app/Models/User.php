@@ -40,6 +40,7 @@ class User extends Authenticatable implements MustVerifyEmail
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+    /*
     protected static function boot()
     {
         parent::boot();
@@ -49,5 +50,5 @@ class User extends Authenticatable implements MustVerifyEmail
                 'title' => $user->username,
             ]);
         });
-    }
+    }*/
 }

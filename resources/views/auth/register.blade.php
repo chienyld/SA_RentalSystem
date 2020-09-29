@@ -10,6 +10,24 @@
                     <form class="form-horizontal" role="form" method="POST" action="{{ route('register') }}">
                         {{ csrf_field() }}
 
+                        <div class="form-group{{ $errors->has('privilege') ? ' has-error' : '' }}">
+                            <label for="name" class="col-md-4 control-label">User Type</label>
+
+                            <div class="col-md-6">
+                                {{Form::label('privilege', 'Admin')}}
+                                {{Form::radio('privilege', 'sa_admin', ['class' => 'form-control'])}}&nbsp&nbsp&nbsp&nbsp&nbsp
+                                {{Form::label('privilege', 'User')}}
+                                {{Form::radio('privilege', 'csmu_user', ['class' => 'form-control'])}}&nbsp&nbsp&nbsp&nbsp&nbsp
+                                {{Form::label('privilege', 'Member')}}
+                                {{Form::radio('privilege', 'csmu_member', ['class' => 'form-control'])}}&nbsp&nbsp&nbsp&nbsp&nbsp
+                                @if ($errors->has('name'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('User Type') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+
                         <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
                             <label for="name" class="col-md-4 control-label">Name</label>
 

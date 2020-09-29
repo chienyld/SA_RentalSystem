@@ -46,7 +46,9 @@
 
                         <ul class="dropdown-menu" role="menu">
                             <li><a href="/profile/{{ Auth::user()->id }}">Profile</a></li>
+                            @if(Auth::user()->privilege=='sa_admin')
                             <li><a href="/dashboard">Dashboard</a></li>
+                            @endif
                             <li>
                                 <a href="{{ route('logout') }}"
                                     onclick="event.preventDefault();

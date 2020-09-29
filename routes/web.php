@@ -43,3 +43,10 @@ Auth::routes();
 
 Route::get('/home', 'App\Http\Controllers\HomeController@index')->name('home');
 
+Route::get('/profile/{user}', 'App\Http\Controllers\ProfilesController@index')->name('profile.show');
+Route::get('/profile/{user}/edit', 'App\Http\Controllers\ProfilesController@edit')->name('profile.edit');
+Route::patch('/profile/{user}', 'App\Http\Controllers\ProfilesController@update')->name('profile.update');
+
+Route::resource('cart', 'App\Http\Controllers\CartController');
+Route::delete('emptyCart', 'App\Http\Controllers\CartController@emptyCart');
+

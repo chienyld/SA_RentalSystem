@@ -4065,12 +4065,9 @@ fieldset[disabled] .btn-default.focus {
 }
 
 .btn-primary {
-  border:none;
-  padding-left:1em;
-  padding-right:1em;
   color: #fff;
   background-color: #3097D1;
-  /*border-color: #2a88bd;*/
+  border-color: #2a88bd;
 }
 
 .btn-primary:focus,

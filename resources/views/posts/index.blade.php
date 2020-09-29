@@ -11,8 +11,14 @@
                     </div>
                     <div class="col-md-8 col-sm-8">
                         <h3><a href="/posts/{{$post->id}}">{{$post->title}}</a></h3>
-                        <small>Written on {{$post->created_at}} by {{$post->user->name}}</small>
+                        <small>Written on {{$post->created_at}} by {{$post->user->name}}</small></br></br>
+                        <form action="{{ url('/cart') }}" method="POST">
+                        {!! csrf_field() !!}
+                        <input class="btn-primary" type="submit" value="borrow">
+                        <input class="btn-primary" value="more" onclick="location.href='/posts/{{$post->id}}'" style="background-color:#BDBDBD">
+                        </form>
                     </div>
+
                 </div>
             </div>
         @endforeach
