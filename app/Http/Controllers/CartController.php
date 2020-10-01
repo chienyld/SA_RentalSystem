@@ -2,81 +2,179 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Product;
+use App\Models\Posts;
 use Illuminate\Http\Request;
-//use Boolfalse\LaravelShoppingCart\Facades\Cart;
+//use Darryldecode\Cart\Facades\CartFacade;
 use Illuminate\Support\Facades\Validator;
+use Darryldecode\Cart\CartCondition;
 
 class CartController extends Controller
 {
-
     public function index()
     {
-        return view('cart');
-    }
+        $userId = 1; // get this from session or wherever it came from
 
-    public function store(Request $request)
-    {
-        $duplicates = Cart::search(function ($cartItem, $rowId) use ($request) {
-            return $cartItem->id === $request->id;
-        });
+        if(request()->ajax())
+        {
+            $items = [];
 
-        if (!$duplicates->isEmpty()) {
-            return redirect('cart')->withSuccessMessage('Item is already in your cart!');
+            \Cart::session($userId)->getContent()->each(function($item) use (&$items)
+            {
+                $items[] = $item;
+            });
+
+            return response(array(
+                'success' => true,
+                'data' => $items,
+                'message' => 'cart get items success'
+            ),200,[]);
         }
-
-        Cart::add($request->id, $request->name, 1, $request->price)->associate(Product::class);
-        return redirect('cart')->withSuccessMessage('Item was added to your cart!');
+        else
+        {
+            return view('cart');
+        }
     }
 
-    public function update(Request $request, $id)
+    public function add()
     {
-        // Validation on max quantity
-        $validator = Validator::make($request->all(), [
-            'quantity' => 'required|numeric|between:1,5'
+        $userId = 1; // get this from session or wherever it came from
+
+        $id = request('id');
+        $name = request('name');
+        $price = request('price');
+        $qty = request('qty');
+
+        $customAttributes = [
+            'color_attr' => [
+                'label' => 'red',
+                'price' => 10.00,
+            ],
+            'size_attr' => [
+                'label' => 'xxl',
+                'price' => 15.00,
+            ]
+        ];
+
+        $item = \Cart::session($userId)->add($id, $name, $price, $qty, $customAttributes);
+
+        return response(array(
+            'success' => true,
+            'data' => $item,
+            'message' => "item added."
+        ),201,[]);
+    }
+
+    public function addCondition()
+    {
+        $userId = 1; // get this from session or wherever it came from
+
+        /** @var \Illuminate\Validation\Validator $v */
+        $v = validator(request()->all(),[
+            'name' => 'required|string',
+            'type' => 'required|string',
+            'target' => 'required|string',
+            'value' => 'required|string',
         ]);
 
-         if ($validator->fails()) {
-            session()->flash('error_message', 'Quantity must be between 1 and 5.');
-            return response()->json(['success' => false]);
-         }
-
-        Cart::update($id, $request->quantity);
-        session()->flash('success_message', 'Quantity was updated successfully!');
-
-        return response()->json(['success' => true]);
-
-    }
-
-    public function destroy($id)
-    {
-        Cart::remove($id);
-        return redirect('cart')->withSuccessMessage('Item has been removed!');
-    }
-
-    public function emptyCart()
-    {
-        Cart::destroy();
-        return redirect('cart')->withSuccessMessage('Your cart has been cleared!');
-    }
-
-    public function switchToWishlist($id)
-    {
-        $item = Cart::get($id);
-
-        Cart::remove($id);
-
-        $duplicates = Cart::instance('wishlist')->search(function ($cartItem, $rowId) use ($id) {
-            return $cartItem->id === $id;
-        });
-
-        if (!$duplicates->isEmpty()) {
-            return redirect('cart')->withSuccessMessage('Item is already in your Wishlist!');
+        if($v->fails())
+        {
+            return response(array(
+                'success' => false,
+                'data' => [],
+                'message' => $v->errors()->first()
+            ),400,[]);
         }
 
-        Cart::instance('wishlist')->add($item->id, $item->name, 1, $item->price)
-                                  ->associate(Product::class);
+        $name = request('name');
+        $type = request('type');
+        $target = request('target');
+        $value = request('value');
 
-        return redirect('cart')->withSuccessMessage('Item has been moved to your Wishlist!');
+        $cartCondition = new CartCondition([
+            'name' => $name,
+            'type' => $type,
+            'target' => $target, // this condition will be applied to cart's subtotal when getSubTotal() is called.
+            'value' => $value,
+            'attributes' => array()
+        ]);
+
+        \Cart::session($userId)->condition($cartCondition);
+
+        return response(array(
+            'success' => true,
+            'data' => $cartCondition,
+            'message' => "condition added."
+        ),201,[]);
+    }
+
+    public function clearCartConditions()
+    {
+        $userId = 1; // get this from session or wherever it came from
+
+        \Cart::session($userId)->clearCartConditions();
+
+        return response(array(
+            'success' => true,
+            'data' => [],
+            'message' => "cart conditions cleared."
+        ),200,[]);
+    }
+
+    public function delete($id)
+    {
+        $userId = 1; // get this from session or wherever it came from
+
+        \Cart::session($userId)->remove($id);
+
+        return response(array(
+            'success' => true,
+            'data' => $id,
+            'message' => "cart item {$id} removed."
+        ),200,[]);
+    }
+
+    public function details()
+    {
+        $userId = 1; // get this from session or wherever it came from
+
+        // get subtotal applied condition amount
+        $conditions = \Cart::session($userId)->getConditions();
+
+
+        // get conditions that are applied to cart sub totals
+        $subTotalConditions = $conditions->filter(function (CartCondition $condition) {
+            return $condition->getTarget() == 'subtotal';
+        })->map(function(CartCondition $c) use ($userId) {
+            return [
+                'name' => $c->getName(),
+                'type' => $c->getType(),
+                'target' => $c->getTarget(),
+                'value' => $c->getValue(),
+            ];
+        });
+
+        // get conditions that are applied to cart totals
+        $totalConditions = $conditions->filter(function (CartCondition $condition) {
+            return $condition->getTarget() == 'total';
+        })->map(function(CartCondition $c) {
+            return [
+                'name' => $c->getName(),
+                'type' => $c->getType(),
+                'target' => $c->getTarget(),
+                'value' => $c->getValue(),
+            ];
+        });
+
+        return response(array(
+            'success' => true,
+            'data' => array(
+                'total_quantity' => \Cart::session($userId)->getTotalQuantity(),
+                'sub_total' => \Cart::session($userId)->getSubTotal(),
+                'total' => \Cart::session($userId)->getTotal(),
+                'cart_sub_total_conditions_count' => $subTotalConditions->count(),
+                'cart_total_conditions_count' => $totalConditions->count(),
+            ),
+            'message' => "Get cart details success."
+        ),200,[]);
     }
 }

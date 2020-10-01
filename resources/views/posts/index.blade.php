@@ -15,7 +15,7 @@
                         <form action="{{ url('/cart') }}" method="POST">
                         {!! csrf_field() !!}
                         <input class="btn-primary" type="submit" value="borrow">
-                        <input class="btn-primary" value="more" onclick="location.href='/posts/{{$post->id}}'" style="background-color:#BDBDBD">
+                        <button class="btn-primary" value="more" onclick="location.href='/posts/{{$post->id}}'" style="background-color:#BDBDBD">more</button>
                         </form>
                     </div>
 

@@ -5,6 +5,8 @@ use App\Http\Controllers\PostsController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\PagesController;
+use App\Http\Controllers\CartController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -47,6 +49,10 @@ Route::get('/profile/{user}', 'App\Http\Controllers\ProfilesController@index')->
 Route::get('/profile/{user}/edit', 'App\Http\Controllers\ProfilesController@edit')->name('profile.edit');
 Route::patch('/profile/{user}', 'App\Http\Controllers\ProfilesController@update')->name('profile.update');
 
-Route::resource('cart', 'App\Http\Controllers\CartController');
-Route::delete('emptyCart', 'App\Http\Controllers\CartController@emptyCart');
+Route::get('/cart','App\Http\Controllers\CartController@index')->name('cart.index');
+Route::post('/cart','App\Http\Controllers\CartController@add')->name('cart.add');
+Route::post('/cart/conditions','App\Http\Controllers\CartController@addCondition')->name('cart.addCondition');
+Route::delete('/cart/conditions','App\Http\Controllers\CartController@clearCartConditions')->name('cart.clearCartConditions');
+Route::get('/cart/details','App\Http\Controllers\CartController@details')->name('cart.details');
+Route::delete('/cart/{id}','App\Http\Controllers\CartController@delete')->name('cart.delete');
 
