@@ -41,7 +41,7 @@ class CartController extends Controller
     public function add(Request $request)
     {
         
-        $userId = 1; // get this from session or wherever it came from
+        $userId = auth()->user()->id; // get this from session or wherever it came from
 
         $id = $request->input('id');
         $name = $request->input('name');
@@ -70,7 +70,7 @@ class CartController extends Controller
 
     public function addCondition()
     {
-        $userId = 1; // get this from session or wherever it came from
+        $userId = auth()->user()->id;
 
         /** @var \Illuminate\Validation\Validator $v */
         $v = validator(request()->all(),[
@@ -113,7 +113,7 @@ class CartController extends Controller
 
     public function clearCartConditions()
     {
-        $userId = 1; // get this from session or wherever it came from
+        $userId = auth()->user()->id;// get this from session or wherever it came from
 
         \Cart::session($userId)->clearCartConditions();
 
@@ -139,7 +139,7 @@ class CartController extends Controller
 
     public function details()
     {
-        $userId = 1; // get this from session or wherever it came from
+        $userId = auth()->user()->id; // get this from session or wherever it came from
 
         // get subtotal applied condition amount
         $conditions = \Cart::session($userId)->getConditions();
