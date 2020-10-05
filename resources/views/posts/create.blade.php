@@ -8,6 +8,14 @@
             {{Form::text('title', '', ['class' => 'form-control', 'placeholder' => 'Title'])}}
         </div>
         <div class="form-group">
+            {{Form::label('deposit', 'Deposit')}}
+            {{Form::number('deposit', 'value', ['class' => 'form-control', 'placeholder' => 'security deposit'])}}
+        </div>
+        <div class="form-group">
+            {{Form::label('inventory', 'Inventory')}}
+            {{Form::number('inventory', 'value', ['class' => 'form-control', 'placeholder' => 'inventory'])}}
+        </div>
+        <div class="form-group">
             {{Form::label('type', 'Type')}}<br>
             {{Form::label('type', 'Type0')}}
             {{Form::radio('type', '0', ['class' => 'form-control'])}}

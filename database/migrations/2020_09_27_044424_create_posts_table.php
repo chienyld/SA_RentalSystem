@@ -18,6 +18,8 @@ class CreatePostsTable extends Migration
             $table->integer('user_id');
             $table->bigInteger('type');
             $table->string('title');
+            $table->bigInteger('deposit');
+            $table->bigInteger('inventory');
             $table->string('cover_image');
             $table->mediumText('body');
             $table->timestamps();

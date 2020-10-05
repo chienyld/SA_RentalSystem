@@ -72,6 +72,8 @@ class PostsController extends Controller
             'title' => 'required',
             'body' => 'required',
             'type' => 'required',
+            'deposit' => 'required',
+            'inventory' => 'required',
             'cover_image' => 'image|nullable|max:1999'
         ]);
 
@@ -101,6 +103,8 @@ class PostsController extends Controller
         // Create Post
         $post = new Post;
         $post->title = $request->input('title');
+        $post->deposit = $request->input('deposit');
+        $post->inventory = $request->input('inventory');
         $post->type = $request->input('type');
         $post->body = $request->input('body');
         $post->user_id = auth()->user()->id;
@@ -156,7 +160,10 @@ class PostsController extends Controller
     {
         $this->validate($request, [
             'title' => 'required',
-            'body' => 'required'
+            'body' => 'required',
+            'type' => 'required',
+            'deposit' => 'required',
+            'inventory' => 'required',
         ]);
 		$post = Post::find($id);
          // Handle File Upload
@@ -185,6 +192,9 @@ class PostsController extends Controller
         // Update Post
         $post->title = $request->input('title');
         $post->body = $request->input('body');
+        $post->body = $request->input('type');
+        $post->body = $request->input('deposit');
+        $post->body = $request->input('inventory');
         if($request->hasFile('cover_image')){
             $post->cover_image = $fileNameToStore;
         }

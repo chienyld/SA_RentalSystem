@@ -2,21 +2,24 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Posts;
+use App\Models\Post;
+use App\Models\User;
 use Illuminate\Http\Request;
-//use Darryldecode\Cart\Facades\CartFacade;
 use Illuminate\Support\Facades\Validator;
 use Darryldecode\Cart\CartCondition;
 
 class CartController extends Controller
 {
+    
     public function index()
     {
-        $userId = 1; // get this from session or wherever it came from
-
+        $userId = auth()->user()->id;
+        //$item=$post;
+        //echo $item;
         if(request()->ajax())
         {
             $items = [];
+            
 
             \Cart::session($userId)->getContent()->each(function($item) use (&$items)
             {
@@ -35,14 +38,15 @@ class CartController extends Controller
         }
     }
 
-    public function add()
+    public function add(Request $request)
     {
+        
         $userId = 1; // get this from session or wherever it came from
 
-        $id = request('id');
-        $name = request('name');
-        $price = request('price');
-        $qty = request('qty');
+        $id = $request->input('id');
+        $name = $request->input('name');
+        $price = $request->input('price');
+        $qty = $request->input('qty');
 
         $customAttributes = [
             'color_attr' => [
