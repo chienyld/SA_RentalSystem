@@ -192,9 +192,9 @@ class PostsController extends Controller
         // Update Post
         $post->title = $request->input('title');
         $post->body = $request->input('body');
-        $post->body = $request->input('type');
-        $post->body = $request->input('deposit');
-        $post->body = $request->input('inventory');
+        $post->type = $request->input('type');
+        $post->deposit = $request->input('deposit');
+        $post->inventory = $request->input('inventory');
         if($request->hasFile('cover_image')){
             $post->cover_image = $fileNameToStore;
         }

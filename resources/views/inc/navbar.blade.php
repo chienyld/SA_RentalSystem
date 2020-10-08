@@ -1,4 +1,4 @@
-<nav class="navbar navbar-inverse">
+<nav class="navbar navbar-inverse" style="z-index:999">
     <div class="container">
         <div class="navbar-header">
 
@@ -25,10 +25,11 @@
 
             <ul class="nav navbar-nav">
               <li><a href="/posts">首頁</a></li>
-              <li><a href="/about">關於</a></li>
+              <li><a href="/about">借用規則</a></li>
               <li><a href="/type0">器材Ａ</a></li>
               <li><a href="/type1">器材Ｂ</a></li>   
               <li><a href="/type2">場地</a></li>
+              <li><a href="/send">外借狀況</a></li>
               
             </ul>
 
@@ -45,9 +46,10 @@
                         </a>
 
                         <ul class="dropdown-menu" role="menu">
-                            <li><a href="/profile/{{ Auth::user()->id }}">Profile</a></li>
+                            <!--<li><a href="/send/{{ Auth::user()->id }}">我的清單</a></li>-->
+                            <li><a href="/cart">我的清單</a></li>
                             @if(Auth::user()->privilege=='sa_admin')
-                            <li><a href="/dashboard">Dashboard</a></li>
+                            <li><a href="/dashboard">品項管理</a></li>
                             @endif
                             <li>
                                 <a href="{{ route('logout') }}"

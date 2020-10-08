@@ -1,15 +1,11 @@
 <!doctype html>
 <html lang="{{ config('app.locale') }}">
-<head>
-    <meta charset="utf-8">
+<head>    <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>Laravel</title>
-
-    <!-- Fonts -->
-    <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
-
+    <title>List</title>
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 
     <!-- Styles -->
@@ -25,17 +21,16 @@
 <div class="row" id="app">
     <div class="container cart">
         <div class="row">
-        <form action="{{ url('/cart') }}" method="POST" class="col-4">
             <div class="col-lg-6">
                 <h2>CART</h2>
                 <table class="table">
                     <thead>
                     <tr>
                         <th>ID</th>
-                        <th>Name</th>
-                        <th>Qty</th>
-                        <th>Price</th>
-                        <th>Action</th>
+                        <th>品項</th>
+                        <th>數量</th>
+                        <th>押金</th>
+                        <th>編輯</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -45,18 +40,18 @@
                         <td>@{{ item.quantity }}</td>
                         <td>@{{ item.price }}</td>
                         <td>
-                            <button v-on:click="removeItem(item.id)" class="btn btn-sm btn-danger">remove</button>
+                        <button v-on:click="removeItem(item.id)" class="btn btn-sm btn-danger">移除</button>
                         </td>
                     </tr>
                     </tbody>
                 </table>
                 <table class="table">
                     <tr>
-                        <td>Items on Cart:</td>
+                        <td>品項數:</td>
                         <td>@{{itemCount}}</td>
                     </tr>
                     <tr>
-                        <td>Total Qty:</td>
+                        <td>總數量:</td>
                         <td>@{{ details.total_quantity }}</td>
                     </tr>
                     <!--
@@ -65,90 +60,16 @@
                         <td>@{{ '$' + details.sub_total.toFixed(2) }}</td>
                     </tr>-->
                     <tr>
-                        <td>Total:</td>
+                        <td>總押金:</td>
                         <td>@{{ '$' + details.total.toFixed(2) }} </td>
                     </tr>
                 </table>
-                <button class="btn-primary" type="submit">send</button>
-
+                <button v-on:click="sendItem()" class="btn-primary">送出申請</button>
             </div>
-        </form>
+        
         </div>
     </div>
 </div>
-<div v-show="" class="row" id="wishlist">
-    <div class="container cart">
-        <div class="row">
-            <div class="col-lg-6">
-                <div class="row">
-                    <div class="col-lg-12">
-                        <h2>ADD WISHLIST ITEM</h2>
-                        <p>(This is using default session storage)</p>
-                        <div class="form-group form-group-sm">
-                            <label>ID</label>
-                            <input v-model="item.id" class="form-control" placeholder="Id">
-                        </div>
-                        <div class="form-group form-group-sm">
-                            <label>Name</label>
-                            <input v-model="item.name" class="form-control" placeholder="Name">
-                        </div>
-                        <div class="form-group form-group-sm">
-                            <label>Price</label>
-                            <input v-model="item.price" class="form-control" placeholder="Price">
-                        </div>
-                        <div class="form-group form-group-sm">
-                            <label>Qty</label>
-                            <input v-model="item.qty" class="form-control" placeholder="Quantity">
-                        </div>
-                        <button v-on:click="addItem()" class="btn btn-primary">Add Item</button>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-6">
-                <h2>WISHLIST</h2>
-                <table class="table">
-                    <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Name</th>
-                        <th>Qty</th>
-                        <th>Price</th>
-                        <th>Action</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr v-for="item in items">
-                        <td>@{{ item.id }}</td>
-                        <td>@{{ item.name }}</td>
-                        <td>@{{ item.quantity }}</td>
-                        <td>@{{ item.price }}</td>
-                        <td>
-                            <button v-on:click="removeItem(item.id)" class="btn btn-sm btn-danger">remove</button>
-                        </td>
-                    </tr>
-                    </tbody>
-                </table>
-                <table class="table">
-                    <tr>
-                        <td>Items on Cart:</td>
-                        <td>@{{itemCount}}</td>
-                    </tr>
-                    <tr>
-                        <td>Total Qty:</td>
-                        <td>@{{ details.total_quantity }}</td>
-                    </tr>
-                    <tr>
-                        <td>Sub Total:</td>
-                        <td>@{{ '$' + details.sub_total.toFixed(2) }}</td>
-                    </tr>
-                    <tr>
-                        <td>Total:</td>
-                        <td>@{{ '$' + details.total.toFixed(2) }}</td>
-                    </tr>
-                </table>
-            </div>
-        </div>
-    </div>
 </div>
 <script
         src="https://code.jquery.com/jquery-3.2.1.min.js"
@@ -156,6 +77,7 @@
         crossorigin="anonymous"></script>
 <script src="https://unpkg.com/vue"></script>
 <script src="https://cdn.jsdelivr.net/vue.resource/1.3.1/vue-resource.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
 <script>
@@ -212,6 +134,42 @@
                             console.log(error);
                         });
                     },
+                    sendItem: function() {
+                        var _this = this;
+                        this.items.forEach(function(item){
+                            console.log(item.id);
+                            console.log(item.name);
+                            console.log(item.price);
+                            console.log(item.quantity);
+                            console.log(_token);
+                            _this.$http.post('/borrows',{
+                            _token:_token,
+                            id:item.id,
+                            name:item.name,
+                            deposit:item.price,
+                            qty:item.quantity
+                        }).then(function(success) {
+                            _this.removeItem(item.id);
+                            console.log(item);
+                        }, function(error) {
+                            console.log(error);
+                        });
+                        this.items=[];
+                        console.log(items);               
+                        });                        
+                        /*var _this = this;
+                        this.$http.post('/borrows',{
+                            _token:_token,
+                            id:_this.item.id,
+                            name:_this.item.name,
+                            deposit:_this.item.price,
+                            qty:_this.item.qty
+                        }).then(function(success) {
+                            window.location.href = "/";
+                        }, function(error) {
+                            console.log(error);
+                        });*/
+                    },
                     addCartCondition: function() {
                         var _this = this;
                         this.$http.post('/cart/conditions',{
@@ -263,77 +221,6 @@
                     loadCartDetails: function() {
                         var _this = this;
                         this.$http.get('/cart/details').then(function(success) {
-                            _this.details = success.body.data;
-                        }, function(error) {
-                            console.log(error);
-                        });
-                    }
-                }
-            });
-            var wishlist = new Vue({
-                el: '#wishlist',
-                data: {
-                    details: {
-                        sub_total: 0,
-                        total: 0,
-                        total_quantity: 0
-                    },
-                    itemCount: 0,
-                    items: [],
-                    item: {
-                        id: '',
-                        name: '',
-                        price: 0.00,
-                        qty: 1
-                    }
-                },
-                mounted:function(){
-                    this.loadItems();
-                },
-                methods: {
-                    addItem: function() {
-                        var _this = this;
-                        this.$http.post('/wishlist',{
-                            _token:_token,
-                            id:_this.item.id,
-                            name:_this.item.name,
-                            price:_this.item.price,
-                            qty:_this.item.qty
-                        }).then(function(success) {
-                            _this.loadItems();
-                        }, function(error) {
-                            console.log(error);
-                        });
-                    },
-                    removeItem: function(id) {
-                        var _this = this;
-                        this.$http.delete('/wishlist/'+id,{
-                            params: {
-                                _token:_token
-                            }
-                        }).then(function(success) {
-                            _this.loadItems();
-                        }, function(error) {
-                            console.log(error);
-                        });
-                    },
-                    loadItems: function() {
-                        var _this = this;
-                        this.$http.get('/wishlist',{
-                            params: {
-                                limit:10
-                            }
-                        }).then(function(success) {
-                            _this.items = success.body.data;
-                            _this.itemCount = success.body.data.length;
-                            _this.loadCartDetails();
-                        }, function(error) {
-                            console.log(error);
-                        });
-                    },
-                    loadCartDetails: function() {
-                        var _this = this;
-                        this.$http.get('/wishlist/details').then(function(success) {
                             _this.details = success.body.data;
                         }, function(error) {
                             console.log(error);

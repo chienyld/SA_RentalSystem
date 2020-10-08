@@ -37,6 +37,7 @@ Route::get('/type2', 'App\Http\Controllers\PostsController@type2');
 //Route::post('follow/{user}', 'FollowsController@store');
 
 Route::resource('posts', 'App\Http\Controllers\PostsController');
+Route::resource('borrows', 'App\Http\Controllers\SendController');
 
 Route::get('/dashboard', 'App\Http\Controllers\DashboardController@index')->middleware('verified');
 //Route::get('/home', 'HomeController@index')->name('home');
@@ -55,4 +56,13 @@ Route::post('/cart/conditions','App\Http\Controllers\CartController@addCondition
 Route::delete('/cart/conditions','App\Http\Controllers\CartController@clearCartConditions')->name('cart.clearCartConditions');
 Route::get('/cart/details','App\Http\Controllers\CartController@details')->name('cart.details');
 Route::delete('/cart/{id}','App\Http\Controllers\CartController@delete')->name('cart.delete');
+
+//Route::get('/send','App\Http\Controllers\SendController@index')->name('send.index');
+//Route::get('/borrows', 'App\Http\Controllers\SendController@index');
+//Route::post('/borrows','App\Http\Controllers\SendController@store')->name('borrows.index');
+Route::post('/borrows','App\Http\Controllers\SendController@store');
+//Route::get('/borrows','App\Http\Controllers\SendController@index')->name('borrows.index');
+
+Route::get('/send','App\Http\Controllers\SendController@index');
+
 

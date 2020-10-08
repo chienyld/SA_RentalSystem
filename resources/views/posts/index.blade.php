@@ -13,11 +13,11 @@
                         <h2><a href="/posts/{{$post->id}}">{{$post->title}}</a></h3>
                         <h3 style="color:#3097D1">${{$post->deposit}}</h3>
                         @if($post->inventory)
-                        <h3 >{{$post->inventory}}available</h3>
+                        <h2 style="font-size:30px"> {{$post->inventory}}  available</h2>
                         @else
                         <h4>unavailable</h4>
                         @endif
-                        </br></br>
+                        <div style="height:30px"></div>
                         
                         <form action="{{ url('/cart') }}" method="POST" class="col-4">
                         

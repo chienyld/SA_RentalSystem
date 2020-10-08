@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Darryldecode\Cart\CartCondition;
 
-class CartController extends Controller
+class SenderController extends Controller
 {
     
     public function index()
