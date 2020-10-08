@@ -1,4 +1,4 @@
-@import url(https://fonts.googleapis.com/css?family=Raleway:300,400,600);@charset "UTF-8";
+@import url(https://fonts.googleapis.com/css?family=Montserrat:300,400,600);@charset "UTF-8";
 
 
 
@@ -4065,9 +4065,15 @@ fieldset[disabled] .btn-default.focus {
 }
 
 .btn-primary {
+  border:none;
+  padding-left:3em;
+  padding-right:3em;
+  padding-top: 0.5em;
+  padding-bottom: 0.5em;
   color: #fff;
   background-color: #3097D1;
-  border-color: #2a88bd;
+  border-radius: 3px;
+  /*border-color: #2a88bd;*/
 }
 
 .btn-primary:focus,

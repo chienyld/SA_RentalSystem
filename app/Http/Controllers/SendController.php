@@ -70,6 +70,7 @@ class SendController extends Controller
         $borrow->name = $request->input('name');
         $borrow->depositamt = $request->input('deposit');
         $borrow->qty = $request->input('qty');
+        $borrow->status = false;
         $borrow->save();
 
         $post = Post::find($borrow->borrow_id);
@@ -90,5 +91,23 @@ class SendController extends Controller
         $borrow = Borrow::find($id);
         return view('borrow.show')->with('borrow', $borrow);
     }
+
+    public function get(Request $request)
+    {
+        $borrow = Borrow::find($id)->get();
+        return response()->json($borrow);
+    }
+    /*public function get(Request $request)
+    {
+        $borrows = Borrow::orderBy('created_at', 'desc')->get();
+        return response()->json($borrows);
+    }*/
+    public function verify(Request $request)
+    {
+        $borrow = Borrow::find($id);
+        $borrow->status = $request->input('status');;
+        $borrow->save();
+    }
+
     
 }

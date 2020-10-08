@@ -22,9 +22,16 @@
         </div>
     </div>
 
-    <!-- Scripts -->
+    <!--     <script src="/vendor/unisharp/laravel-ckeditor/ckeditor.js"></script> -->
     <script src="{{ asset('js/app.js') }}"></script>
-    <script src="/vendor/unisharp/laravel-ckeditor/ckeditor.js"></script>
+    <script src="https://cdn.ckeditor.com/ckeditor5/23.0.0/classic/ckeditor.js"></script>
+    <script>
+    ClassicEditor
+        .create( document.querySelector( '#editor' ) )
+        .catch( error => {
+            console.error( error );
+        } );
+</script>
     <script>
         CKEDITOR.replace( 'article-ckeditor' );
     </script>

@@ -44,7 +44,8 @@ Route::get('/dashboard', 'App\Http\Controllers\DashboardController@index')->midd
 
 Auth::routes();
 
-Route::get('/home', 'App\Http\Controllers\HomeController@index')->name('home');
+//Route::get('/home', 'App\Http\Controllers\HomeController@index')->name('home');
+Route::get('/home', 'App\Http\Controllers\PostsController@index')->name('home');
 
 Route::get('/profile/{user}', 'App\Http\Controllers\ProfilesController@index')->name('profile.show');
 Route::get('/profile/{user}/edit', 'App\Http\Controllers\ProfilesController@edit')->name('profile.edit');
@@ -64,5 +65,7 @@ Route::post('/borrows','App\Http\Controllers\SendController@store');
 //Route::get('/borrows','App\Http\Controllers\SendController@index')->name('borrows.index');
 
 Route::get('/send','App\Http\Controllers\SendController@index');
+Route::get('/send/{id}','App\Http\Controllers\SendController@verify');
+
 
 
