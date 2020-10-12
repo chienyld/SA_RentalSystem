@@ -17,31 +17,38 @@
                                 <th>數量</th>
                                 <th>申請日期</th>
                                 <th>狀態</th>
-                                <th></th>
+                                
                             </tr>
-                            @foreach($borrows as $borrow)
+                            @foreach($borrows as $borrow)                               
+                                <div class="row">
                                 <tr>
-                                    
+                                    <div class="col-lg-8 col-sm-12">
+                                    {!! csrf_field() !!}
                                     <td>{{$borrow->user_id}}</td>
                                     <td>{{$borrow->name}}</td>
                                     <td>{{$borrow->qty}}</td>
                                     <td>{{$borrow->created_at}}</td> 
-                                    
                                     <td>
                                     <div v-if="{{$borrow->status}}"><button class="statusbtn btn btn-success">已通過</button></div>
                                     <div v-else><button class="statusbtn btn btn-danger">審核中</button></div>
                                     </td> 
+                                    </div>
+                                
                                     <td>
-                                    @if(Auth::user()->privilege=='sa_admin')
-                                    <!--<div v-if="{{$borrow->status}}"><button onclick="location.href='/send/verify'" class="btn btn-success">同意申請</button></div>
-                                    <div v-else><button onclick="location.href='/send/verify'" class="btn btn-danger">取消同意</button></div>-->
-                                    <verify-status datastatus="{{ $borrow->status }}" dataid="{{ $borrow->user_id }}" dataitems="{{ $borrow->name }}"></verify-status>
-                                    @else
-                                    <div v-if="{{$borrow->status}}">請於中午至學務處領取器材</div>
-                                    <div v-else>審核進行中，請稍後</div>
-                                    @endif
-                                    </td>                          
+                                    <div class="col-lg-4 col-sm-12">
+                                        @if(Auth::user()->privilege=='sa_admin')
+                                        <!--<div v-if="{{$borrow->status}}"><button onclick="location.href='/send/verify'" class="btn btn-success">同意申請</button></div>
+                                        <div v-else><button onclick="location.href='/send/verify'" class="btn btn-danger">取消同意</button></div>-->
+                                        <verify-status datastatus="{{ $borrow->status }}" dataid="{{ $borrow->id }}" dataitem="{{ $borrow->name }}"></verify-status>
+                                        @else
+                                        <div v-if="{{$borrow->status}}">請於中午至學務處領取器材</div>
+                                        <div v-else>審核進行中，請稍後</div>
+                                        @endif
+                                    </div>
+                                </td>
                                 </tr>
+                                </div>                         
+                                
                             @endforeach
                         </table>
                     @else

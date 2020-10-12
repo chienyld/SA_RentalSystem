@@ -15,24 +15,34 @@
         },
 
         data: function () {
-            return {
+            return {      
                 status: this.datastatus,
                 id: this.dataid,
-                item:this.dataitem
+                item:this.dataitem,
+                buttoncheck:true
             }
         },
-
+        computed: {
+            cache: false,
+            statusText() {
+                return (this.status) ? '確認歸還' : '取消歸還';
+            }
+        },
         methods: {  
             checkstatus() {
-                var _token = '<?php echo csrf_token() ?>';
+                //var _token = '<?php echo csrf_token() ?>';
                 var _this=this;
                 console.log(this.id);
+                console.log(_this.datastatus);
+                console.log(_this.dataitem);
                 this.$http.post('/send/' + this.dataid ,{
-                    id:_this.datastatus,
-                    item:_this.dataid,
-                    status:_this.dataitem
+                    id:_this.dataid,
+                    item:_this.dataitem,
+                    status:_this.datastatus
                 }).then(function(success) {
-                            _this.loadItems();
+                    window.location = "/send";
+                    console.log(_this.status);
+                    console.log(response.data);
                         }, function(error) {
                             console.log(error);
                         });/*
@@ -45,12 +55,6 @@
                             window.location = '/send';
                         }
                     });*/
-            }
-        },
-
-        computed: {
-            statusText() {
-                return (this.datastatus) ? '同意申請' : '取消同意';
             }
         }
     }

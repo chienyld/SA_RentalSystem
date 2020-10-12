@@ -104,8 +104,13 @@ class SendController extends Controller
     }*/
     public function verify(Request $request)
     {
+        $id=$request->input('id');
+        $name=$request->input('item');
+        $unstatus=$request->input('status');
+        $status=!$unstatus;
         $borrow = Borrow::find($id);
-        $borrow->status = $request->input('status');;
+        //$borrow = Borrow::where('user_id', '=', $id, 'and', 'name', '=', $name)->get();
+        $borrow->status = $status;
         $borrow->save();
     }
 

@@ -20,6 +20,7 @@ class CreateBorrowTable extends Migration
             $table->string('name');
             $table->bigInteger('depositamt');
             $table->bigInteger('qty');
+            $table->integer('status');
             $table->timestamps();
             //$table->primary('id');
 

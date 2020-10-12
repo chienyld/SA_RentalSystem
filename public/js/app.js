@@ -2022,22 +2022,32 @@ __webpack_require__.r(__webpack_exports__);
     return {
       status: this.datastatus,
       id: this.dataid,
-      item: this.dataitem
+      item: this.dataitem,
+      buttoncheck: true
     };
+  },
+  computed: {
+    cache: false,
+    statusText: function statusText() {
+      return this.status ? '確認歸還' : '取消歸還';
+    }
   },
   methods: {
     checkstatus: function checkstatus() {
-      var _token = '<?php echo csrf_token() ?>';
-
+      //var _token = '<?php echo csrf_token() ?>';
       var _this = this;
 
       console.log(this.id);
+      console.log(_this.datastatus);
+      console.log(_this.dataitem);
       this.$http.post('/send/' + this.dataid, {
-        id: _this.datastatus,
-        item: _this.dataid,
-        status: _this.dataitem
+        id: _this.dataid,
+        item: _this.dataitem,
+        status: _this.datastatus
       }).then(function (success) {
-        _this.loadItems();
+        window.location = "/send";
+        console.log(_this.status);
+        console.log(response.data);
       }, function (error) {
         console.log(error);
       });
@@ -2051,11 +2061,6 @@ __webpack_require__.r(__webpack_exports__);
        window.location = '/send';
       }
       });*/
-    }
-  },
-  computed: {
-    statusText: function statusText() {
-      return this.datastatus ? '同意申請' : '取消同意';
     }
   }
 });
@@ -51911,8 +51916,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /Applications/MAMP/htdocs/SA_Rental/resources/js/app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! /Applications/MAMP/htdocs/SA_Rental/resources/css/app.css */"./resources/css/app.css");
+__webpack_require__(/*! /Applications/MAMP/htdocs/lara8/resources/js/app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! /Applications/MAMP/htdocs/lara8/resources/css/app.css */"./resources/css/app.css");
 
 
 /***/ }),
