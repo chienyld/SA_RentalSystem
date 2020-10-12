@@ -6,40 +6,51 @@
 
 <script>
     export default {
-        props: ['status1', 'id' , 'item'],
+        props: ['datastatus', 'dataid' , 'dataitem'],
         mounted() {
-            console.log('Component mounted.')
+            console.log(this.datastatus);
+            console.log(this.dataid);
+            console.log(this.dataitem);
+            console.log('Component mounted.');
         },
 
         data: function () {
             return {
-                status: this.status1,
+                status: this.datastatus,
+                id: this.dataid,
+                item:this.dataitem
             }
         },
 
-        methods: {
+        methods: {  
             checkstatus() {
-                axios.post('/send/' + this.id ,{
-                    id:id,
-                    item:item,
-                    status:status
-                })
+                var _token = '<?php echo csrf_token() ?>';
+                var _this=this;
+                console.log(this.id);
+                this.$http.post('/send/' + this.dataid ,{
+                    id:_this.datastatus,
+                    item:_this.dataid,
+                    status:_this.dataitem
+                }).then(function(success) {
+                            _this.loadItems();
+                        }, function(error) {
+                            console.log(error);
+                        });/*
                     .then(response => {
                         this.status = ! this.status;
-
                         console.log(response.data);
                     })
                     .catch(errors => {
                         if (errors.response.status == 401) {
                             window.location = '/send';
                         }
-                    });
+                    });*/
             }
         },
 
         computed: {
             statusText() {
-                return (this.status) ? '同意申請' : '取消同意';
+                return (this.datastatus) ? '同意申請' : '取消同意';
             }
         }
     }

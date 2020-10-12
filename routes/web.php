@@ -65,7 +65,7 @@ Route::post('/borrows','App\Http\Controllers\SendController@store');
 //Route::get('/borrows','App\Http\Controllers\SendController@index')->name('borrows.index');
 
 Route::get('/send','App\Http\Controllers\SendController@index');
-Route::get('/send/{id}','App\Http\Controllers\SendController@verify');
+Route::post('/send/{id}','App\Http\Controllers\SendController@verify');
 
 
 

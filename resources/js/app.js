@@ -5,9 +5,14 @@
  */
 
 require('./bootstrap');
-
-window.Vue = require('vue');
-
+import Vue from 'vue';
+/*
+import http from 'axios'
+Vue.prototype.$http = http
+window.Vue = require('vue');*/
+import  VueResource  from 'vue-resource'
+ 
+Vue.use(VueResource);
 /**
  * The following block of code may be used to automatically register your
  * Vue components. It will recursively scan this directory for the Vue

@@ -35,7 +35,7 @@
                                     @if(Auth::user()->privilege=='sa_admin')
                                     <!--<div v-if="{{$borrow->status}}"><button onclick="location.href='/send/verify'" class="btn btn-success">同意申請</button></div>
                                     <div v-else><button onclick="location.href='/send/verify'" class="btn btn-danger">取消同意</button></div>-->
-                                    <verify-status status="{{ $borrow->status }}" id="{{ $borrow->user_id }}" items="{{ $borrow->name }}"></verify-status>
+                                    <verify-status datastatus="{{ $borrow->status }}" dataid="{{ $borrow->user_id }}" dataitems="{{ $borrow->name }}"></verify-status>
                                     @else
                                     <div v-if="{{$borrow->status}}">請於中午至學務處領取器材</div>
                                     <div v-else>審核進行中，請稍後</div>
