@@ -45,13 +45,13 @@ class CartController extends Controller
     {
         
         $userId = auth()->user()->id; // get this from session or wherever it came from
-
+        $inventory = $request->input('inventory');
         $id = $request->input('id');
         $name = $request->input('name');
         $price = $request->input('price');
         $qty = $request->input('qty');
 
-        $customAttributes = [
+        /*$customAttributes = [
             'color_attr' => [
                 'label' => 'red',
                 'price' => 10.00,
@@ -60,9 +60,10 @@ class CartController extends Controller
                 'label' => 'xxl',
                 'price' => 15.00,
             ]
-        ];
+        ];*/
+        if ($inventory>=$qty){
 
-        $item = \Cart::session($userId)->add($id, $name, $price, $qty, $customAttributes);
+        $item = \Cart::session($userId)->add($id, $name, $price, $qty);
 
         /*return response(array(
             'success' => true,
@@ -70,6 +71,10 @@ class CartController extends Controller
             'message' => "item added."
         ),201,[]);*/
         return view('/cart');
+        }
+        else{
+        return view('/cart');    
+        }
     }
 
     public function addCondition()

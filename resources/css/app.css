@@ -1,7 +1,14 @@
 @import url(https://fonts.googleapis.com/css?family=Montserrat:300,400,600);@charset "UTF-8";
 
-
-
+.statusbtn{
+  pointer-events: none;
+}
+.showboard.small{
+  font-size: 0.5em;
+}
+.showboard{
+  font-size: 1.6em;
+}
 /*!
  * Bootstrap v3.3.7 (http://getbootstrap.com)
  * Copyright 2011-2016 Twitter, Inc.
@@ -4202,7 +4209,7 @@ fieldset[disabled] .btn-success.focus {
 
 .btn-info {
   color: #fff;
-  background-color: #8eb4cb;
+  background-color: #3d91c5;
   border-color: #7da8c3;
 }
 

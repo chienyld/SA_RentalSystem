@@ -2011,11 +2011,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ['datastatus', 'dataid', 'dataitem'],
+  props: ['datastatus', 'dataid', 'dataitem', 'dataqty'],
   mounted: function mounted() {
-    console.log(this.datastatus);
+    /*console.log(this.datastatus);
     console.log(this.dataid);
-    console.log(this.dataitem);
+    console.log(this.dataitem);*/
     console.log('Component mounted.');
   },
   data: function data() {
@@ -2023,13 +2023,24 @@ __webpack_require__.r(__webpack_exports__);
       status: this.datastatus,
       id: this.dataid,
       item: this.dataitem,
-      buttoncheck: true
+      qty: this.dataqty
     };
   },
   computed: {
-    cache: false,
     statusText: function statusText() {
-      return this.status ? '確認歸還' : '取消歸還';
+      //return (this.status) ? '確認歸還' : '取消歸還';
+      if (this.status == false) {
+        return '確認歸還';
+      } else {
+        return '取消歸還';
+      }
+    },
+    actionButton: function actionButton() {
+      if (this.status == false) {
+        return 'btn btn-info';
+      } else {
+        return 'btn btn-danger';
+      }
     }
   },
   methods: {
@@ -2040,14 +2051,17 @@ __webpack_require__.r(__webpack_exports__);
       console.log(this.id);
       console.log(_this.datastatus);
       console.log(_this.dataitem);
+      console.log(_this.dataqty);
       this.$http.post('/send/' + this.dataid, {
         id: _this.dataid,
         item: _this.dataitem,
-        status: _this.datastatus
+        status: _this.datastatus,
+        qty: _this.dataqty
       }).then(function (success) {
         window.location = "/send";
-        console.log(_this.status);
-        console.log(response.data);
+        console.log(_this.dataqty); //this.status = JSON.parse(status);
+
+        console.log(_this.status); //console.log(response.data);
       }, function (error) {
         console.log(error);
       });
@@ -37747,7 +37761,7 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c("div", [
     _c("button", {
-      staticClass: "btn btn-primary ml-4",
+      class: _vm.actionButton,
       domProps: { textContent: _vm._s(_vm.statusText) },
       on: { click: _vm.checkstatus }
     })

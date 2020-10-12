@@ -35,5 +35,6 @@
     <script>
         CKEDITOR.replace( 'article-ckeditor' );
     </script>-->
+
 </body>
 </html>

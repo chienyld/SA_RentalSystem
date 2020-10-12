@@ -25,11 +25,12 @@
                         @auth
                         
                         @endauth
+                        <input type="hidden" name="inventory" value="{{$post->inventory}}">
                         <input type="hidden" name="id" value="{{$post->id}}">
                         <input type="hidden" name="name" value="{{$post->title}}">
                         <input type="hidden" name="price" value="{{$post->deposit}}">
                         <div class="col-lg-4 col-md-2 col-sm-2">
-                        <input type="number" name="qty" value="qty" class="form-control" placeholder= "quantity">
+                        <input type="number" name="qty" value="qty" class="form-control" placeholder= "quantity" min="1" max="{{$post->inventory}}">
                         </div>
                         <input class="btn-primary" type="submit" value="Add To List">
                         

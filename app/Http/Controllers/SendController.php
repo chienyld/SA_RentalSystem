@@ -63,7 +63,7 @@ class SendController extends Controller
             'deposit' => 'required',
             'qty' => 'required'
         ]);
-
+        
         $borrow=new Borrow;
         $borrow->borrow_id = $request->input('id');
         $borrow->user_id = auth()->user()->id; // get this from session or wherever it came from
@@ -105,14 +105,27 @@ class SendController extends Controller
     public function verify(Request $request)
     {
         $id=$request->input('id');
-        $name=$request->input('item');
+        $item=$request->input('item');
         $unstatus=$request->input('status');
+        $qty=$request->input('qty');
         $status=!$unstatus;
         $borrow = Borrow::find($id);
+        $post = Post::find($item);
         //$borrow = Borrow::where('user_id', '=', $id, 'and', 'name', '=', $name)->get();
         $borrow->status = $status;
+        if($status){
+        $post->inventory = $post->inventory+$qty;
+        }
+        else{
+        $post->inventory = $post->inventory-$qty;    
+        }
         $borrow->save();
-    }
+        $post->save();
+        /*return response()->json([
+            'status'=> $status
+          ], 200);*/
+        return redirect('send');
+   }
 
     
 }
