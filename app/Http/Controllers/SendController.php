@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Facades\Image;
 use App\Models\Borrow;
 use App\Models\Post;
+use App\Models\User;
 use DB;
 
 class SendController extends Controller
@@ -77,7 +78,7 @@ class SendController extends Controller
         $post->inventory = $post->inventory-$borrow->qty;
         $post->save();
 
-        return redirect('send')->with('success', 'Borrow Created');
+        return redirect('send')->with('alert', 'Borrow Created');
     }
 
     /**

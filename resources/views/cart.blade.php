@@ -151,8 +151,10 @@
                         }).then(function(success) {
                             _this.removeItem(item.id);
                             console.log(item);
+                            alert('申請成功，請於隔日中午至學務處領取！');
+
                         }, function(error) {
-                            console.log(error);
+                            console.log(error)
                         });
                         this.items=[];
                         console.log(items);               

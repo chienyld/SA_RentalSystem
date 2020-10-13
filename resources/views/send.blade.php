@@ -20,7 +20,7 @@
                                 <th></th>
                                 
                             </tr>
-                            @foreach($borrows as $borrow)                               
+                            @foreach($borrows as $borrow)                       
                                 <div class="row">
                                 <tr>
                                     {!! csrf_field() !!}

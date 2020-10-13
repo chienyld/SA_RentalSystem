@@ -71,7 +71,8 @@ class CartController extends Controller
         return view('/cart');
         }
         else{
-        return redirect('/posts');    
+        //return redirect('/posts');    
+        return redirect()->back() ->with('alert', '請輸入有效數值！');
         }
     }
 

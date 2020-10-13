@@ -37821,8 +37821,7 @@ var render = function() {
     _c("button", {
       staticClass: "statusbtn btn",
       class: _vm.actionButton,
-      domProps: { textContent: _vm._s(_vm.statusText) },
-      on: { click: _vm.checkstatus }
+      domProps: { textContent: _vm._s(_vm.statusText) }
     })
   ])
 }
@@ -51959,8 +51958,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /Applications/MAMP/htdocs/lara8/resources/js/app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! /Applications/MAMP/htdocs/lara8/resources/css/app.css */"./resources/css/app.css");
+__webpack_require__(/*! /Applications/MAMP/htdocs/SA_Rental/resources/js/app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! /Applications/MAMP/htdocs/SA_Rental/resources/css/app.css */"./resources/css/app.css");
 
 
 /***/ }),

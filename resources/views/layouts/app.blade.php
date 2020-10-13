@@ -24,6 +24,14 @@
 
     <!--     <script src="/vendor/unisharp/laravel-ckeditor/ckeditor.js"></script> -->
     <script src="{{ asset('js/app.js') }}"></script>
+    <script>
+    var msg = '{{Session::get('alert')}}';
+    var exist = '{{Session::has('alert')}}';
+    if(exist){
+      alert(msg);
+    }
+    </script>
+
     <!-- <script src="https://cdn.ckeditor.com/ckeditor5/23.0.0/classic/ckeditor.js"></script>
     <script>
     ClassicEditor

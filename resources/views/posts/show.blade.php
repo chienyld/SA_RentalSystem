@@ -9,17 +9,30 @@
     </div>
     <br><br>
     <div class="showboard">
-    <div>
-        type {!!$post->type!!}
+    <div style="padding:10px">                   
+    <div style="font-size:1.1em;color:#0f4c81">
+        押金 ${!!$post->deposit!!}
     </div>
-    <div>
-        deposit ${!!$post->deposit!!}
+    <div style="font-size:1em;color:#3f5d91">
+        剩餘 <b> {!!$post->inventory!!} </b> 個可借用
     </div>
-    <div>
-        {!!$post->inventory!!} available
-    </div>
+    <div style="font-size:0.8em">
+        {!!$post->body!!}
+    </div></div>
+    <form action="{{ url('/cart') }}" method="POST" class="col-4">
+    {!! csrf_field() !!}
+    @auth
+    
+    @endauth
+    <input type="hidden" name="inventory" value="{{$post->inventory}}">
+    <input type="hidden" name="id" value="{{$post->id}}">
+    <input type="hidden" name="name" value="{{$post->title}}">
+    <input type="hidden" name="price" value="{{$post->deposit}}">
+    <example-component min="1" max="{{$post->inventory}}"></example-component>
+    </form>
+
     <hr>
-    <small>Written on {{$post->created_at}} by {{$post->user->name}}</small>
+    <small style="font-size:0.5em;">Written on {{$post->created_at}} by {{$post->user->name}}</small>
     <hr>
     </div></div>
     @if(!Auth::guest())

@@ -13,9 +13,9 @@
                         <h2><a href="/posts/{{$post->id}}">{{$post->title}}</a></h3>
                         <h3 style="color:#3097D1">${{$post->deposit}}</h3>
                         @if($post->inventory)
-                        <h2 style="font-size:30px"> {{$post->inventory}}  available</h2>
+                        <h2 style="font-size:30px">剩餘 <b> {!!$post->inventory!!} </b> 個可借用</h2>
                         @else
-                        <h4>unavailable</h4>
+                        <h4>全數外借中</h4>
                         @endif
                         <div style="height:30px"></div>
                         
@@ -29,18 +29,8 @@
                         <input type="hidden" name="id" value="{{$post->id}}">
                         <input type="hidden" name="name" value="{{$post->title}}">
                         <input type="hidden" name="price" value="{{$post->deposit}}">
-                        <!--<div class="col-lg-4 col-md-2 col-sm-2">
-                        <input type="number" name="qty" value="qty" class="form-control" placeholder= "quantity" min="1" max="{{$post->inventory}}">
-                        </div>
-                        <input class="btn-primary" type="submit" value="加入清單">-->
                         <example-component min="1" max="{{$post->inventory}}"></example-component>
                         </form>
-                        <!--
-                        <div class="col-4">
-                        <button class="btn-primary" value="more" onclick="location.href='/posts/{{$post->id}}'" style="background-color:#BDBDBD">more</button>
-                        </div>
-                        <small>Written on {{$post->created_at}} by {{$post->user->name}}</small>
-                        --> 
                     </div>
 
                 </div>
