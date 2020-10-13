@@ -1,6 +1,6 @@
 <template>
 <div>
-    <button v-bind:class="actionButton" @click="checkstatus" v-text="statusText"></button>
+    <button style="margin-top:5px" v-bind:class="actionButton" @click="checkstatus" v-text="statusText"></button>
 </div>
 </template>
 

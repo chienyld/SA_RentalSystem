@@ -1,25 +1,38 @@
 <template>
-    <button v-if="statusButton()" class="btn-primary">{{statusText()}}</button>
-    <button v-else class="btn-danger">{{statusText()}}</button>
+<div>
+    <button class="statusbtn btn" v-bind:class="actionButton" @click="checkstatus" v-text="statusText"></button>
+</div>
 </template>
 
 <script>
     export default {
-        props: ['status'],
+        props: ['datastatus'],
         mounted() {
-            console.log('Component mounted.')
+            /*console.log(this.datastatus);
+            console.log(this.dataid);
+            console.log(this.dataitem);*/
+            console.log('Component mounted.');
         },
+
         data: function () {
-            return {
-                status: borrow.status,
+            return {      
+                status: this.datastatus,
             }
         },
         computed: {
-            statusText() {
-                return (this.status) ? '外借中' : '審核中';
+            statusText:function() {
+                if (this.status ==false){
+                return '外借中'}
+                else{
+                return '已歸還'
+                }
             },
-            statusButton(){
-                return this.status;
+            actionButton:function (){
+                if (this.status ==false){
+                return 'btn-danger'}
+                else{
+                return 'btn-success'
+                }
             }
         }
     }

@@ -14,8 +14,6 @@ class CartController extends Controller
     public function index()
     {
         $userId = auth()->user()->id;
-        //$item=$post;
-        //echo $item;
         if(request()->ajax())
         {
             $items = [];
@@ -73,7 +71,7 @@ class CartController extends Controller
         return view('/cart');
         }
         else{
-        return view('/cart');    
+        return redirect('/posts');    
         }
     }
 

@@ -29,18 +29,19 @@
                                     <td>{{$borrow->qty}}</td>
                                     <td>{{$borrow->created_at}}</td> 
                                     <td>
-                                    <div v-if="{{$borrow->status}}"><button class="statusbtn btn btn-success">已歸還</button></div>
-                                    <div v-else><button class="statusbtn btn btn-danger">外借中</button></div>
-                                    </td> 
-                                    <td>
+                                    <div class="row">
+                                    <div class="col-lg-6">
+                                    <verify-status2 datastatus="{{ $borrow->status }}"></verify-status2>
+                                    </div>
+                                    <div class="col-lg-6">
                                         @if(Auth::user()->privilege=='sa_admin')
-                                        <!--<div v-if="{{$borrow->status}}"><button onclick="location.href='/send/verify'" class="btn btn-success">同意申請</button></div>
-                                        <div v-else><button onclick="location.href='/send/verify'" class="btn btn-danger">取消同意</button></div>-->
                                         <verify-status datastatus="{{ $borrow->status }}" dataid="{{ $borrow->id }}" dataitem="{{ $borrow->borrow_id }}" dataqty="{{ $borrow->qty }}"></verify-status>
                                         @else
                                         <div v-if="{{$borrow->status}}">器材已完成歸還，感謝使用本系統</div>
                                         <div v-else>器材借用申請成功，請於明日中午至學務處領取器材</div>
                                         @endif
+                                    </div>
+                                    </div>
                                     </td>
                                     
                                 </tr>

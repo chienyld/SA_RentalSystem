@@ -1914,33 +1914,23 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ['userId', 'follows'],
   mounted: function mounted() {
     console.log('Component mounted.');
   },
   data: function data() {
     return {
-      status: this.follows
+      amt: ''
     };
   },
-  methods: {
-    followUser: function followUser() {
-      var _this = this;
-
-      axios.post('/follow/' + this.userId).then(function (response) {
-        _this.status = !_this.status;
-        console.log(response.data);
-      })["catch"](function (errors) {
-        if (errors.response.status == 401) {
-          window.location = '/login';
-        }
-      });
-    }
-  },
   computed: {
-    buttonText: function buttonText() {
-      return this.status ? 'Unfollow' : 'Follow';
+    actionButton: function actionButton() {
+      if (this.amt) {
+        return '';
+      } else {
+        return '';
+      }
     }
   }
 });
@@ -2095,22 +2085,34 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ['status'],
+  props: ['datastatus'],
   mounted: function mounted() {
+    /*console.log(this.datastatus);
+    console.log(this.dataid);
+    console.log(this.dataitem);*/
     console.log('Component mounted.');
   },
   data: function data() {
     return {
-      status: borrow.status
+      status: this.datastatus
     };
   },
   computed: {
     statusText: function statusText() {
-      return this.status ? '外借中' : '審核中';
+      if (this.status == false) {
+        return '外借中';
+      } else {
+        return '已歸還';
+      }
     },
-    statusButton: function statusButton() {
-      return this.status;
+    actionButton: function actionButton() {
+      if (this.status == false) {
+        return 'btn-danger';
+      } else {
+        return 'btn-success';
+      }
     }
   }
 });
@@ -37699,12 +37701,37 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [
-    _c("button", {
-      staticClass: "btn btn-primary ml-4",
-      domProps: { textContent: _vm._s(_vm.buttonText) },
-      on: { click: _vm.followUser }
-    })
+  return _c("div", { staticClass: "row" }, [
+    _c("input", {
+      directives: [
+        { name: "model", rawName: "v-model", value: _vm.amt, expression: "amt" }
+      ],
+      staticClass: "form-control col-lg-6",
+      staticStyle: { margin: "8px" },
+      attrs: {
+        type: "number",
+        name: "qty",
+        value: "qty",
+        placeholder: "quantity"
+      },
+      domProps: { value: _vm.amt },
+      on: {
+        input: function($event) {
+          if ($event.target.composing) {
+            return
+          }
+          _vm.amt = $event.target.value
+        }
+      }
+    }),
+    _vm._v(" "),
+    this.amt
+      ? _c("input", {
+          staticClass: "btn-primary col-12",
+          staticStyle: { margin: "8px" },
+          attrs: { type: "submit", value: "加入清單" }
+        })
+      : _vm._e()
   ])
 }
 var staticRenderFns = []
@@ -37762,6 +37789,7 @@ var render = function() {
   return _c("div", [
     _c("button", {
       class: _vm.actionButton,
+      staticStyle: { "margin-top": "5px" },
       domProps: { textContent: _vm._s(_vm.statusText) },
       on: { click: _vm.checkstatus }
     })
@@ -37789,13 +37817,14 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm.statusButton()
-    ? _c("button", { staticClass: "btn-primary" }, [
-        _vm._v(_vm._s(_vm.statusText()))
-      ])
-    : _c("button", { staticClass: "btn-danger" }, [
-        _vm._v(_vm._s(_vm.statusText()))
-      ])
+  return _c("div", [
+    _c("button", {
+      staticClass: "statusbtn btn",
+      class: _vm.actionButton,
+      domProps: { textContent: _vm._s(_vm.statusText) },
+      on: { click: _vm.checkstatus }
+    })
+  ])
 }
 var staticRenderFns = []
 render._withStripped = true
