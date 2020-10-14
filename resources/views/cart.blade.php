@@ -7,22 +7,13 @@
 
     <title>List</title>
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-
-    <!-- Styles -->
-    <style>
-        .cart {
-            padding-bottom: 20px;
-            padding-top: 20px;
-        }
-    </style>
 </head>
 <body>
 @include('inc.navbar')
 <div class="row" id="app">
-    <div class="container cart">
-        <div class="row">
-            <div class="col-lg-6">
-                <h2>CART</h2>
+    <div class="row" style="margin: 2rem">
+            <div class="col-lg-6 col-lg-offset-3" style="">
+                <h2>我的清單</h2>
                 <table class="table">
                     <thead>
                     <tr>
@@ -65,7 +56,6 @@
                     </tr>
                 </table>
                 <button v-on:click="sendItem()" class="btn-primary">送出申請</button>
-            </div>
         
         </div>
     </div>
@@ -78,8 +68,9 @@
 <script src="https://unpkg.com/vue"></script>
 <script src="https://cdn.jsdelivr.net/vue.resource/1.3.1/vue-resource.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
+
 <script>
     (function($) {
         var _token = '<?php echo csrf_token() ?>';
@@ -151,7 +142,7 @@
                         }).then(function(success) {
                             _this.removeItem(item.id);
                             console.log(item);
-                            alert('申請成功，請於隔日中午至學務處領取！');
+                            alert(item.name+'申請成功，請於隔日中午至學務處領取！');
 
                         }, function(error) {
                             console.log(error)
@@ -233,5 +224,6 @@
         });
     })(jQuery);
 </script>
+
 </body>
 </html>

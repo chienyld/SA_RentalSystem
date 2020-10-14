@@ -18,8 +18,8 @@
                                 {{Form::radio('privilege', 'sa_admin', ['class' => 'form-control'])}}&nbsp&nbsp&nbsp&nbsp&nbsp
                                 {{Form::label('privilege', 'User')}}
                                 {{Form::radio('privilege', 'csmu_user', ['class' => 'form-control'])}}&nbsp&nbsp&nbsp&nbsp&nbsp
-                                {{Form::label('privilege', 'Member')}}
-                                {{Form::radio('privilege', 'csmu_member', ['class' => 'form-control'])}}&nbsp&nbsp&nbsp&nbsp&nbsp
+                                <!--{{Form::label('privilege', 'Member')}}
+                                {{Form::radio('privilege', 'csmu_member', ['class' => 'form-control'])}}&nbsp&nbsp&nbsp&nbsp&nbsp-->
                                 @if ($errors->has('name'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('User Type') }}</strong>

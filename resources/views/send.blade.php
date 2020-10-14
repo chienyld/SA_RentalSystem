@@ -24,7 +24,7 @@
                                 <div class="row">
                                 <tr>
                                     {!! csrf_field() !!}
-                                    <td>{{$borrow->user_id}}</td>
+                                    <td>{{$borrow->user_name}}</td>
                                     <td>{{$borrow->name}}</td>
                                     <td>{{$borrow->qty}}</td>
                                     <td>{{$borrow->created_at}}</td> 

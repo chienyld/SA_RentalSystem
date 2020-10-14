@@ -68,6 +68,7 @@ class SendController extends Controller
         $borrow=new Borrow;
         $borrow->borrow_id = $request->input('id');
         $borrow->user_id = auth()->user()->id; // get this from session or wherever it came from
+        $borrow->user_name = auth()->user()->name; // get this from session or wherever it came from
         $borrow->name = $request->input('name');
         $borrow->depositamt = $request->input('deposit');
         $borrow->qty = $request->input('qty');

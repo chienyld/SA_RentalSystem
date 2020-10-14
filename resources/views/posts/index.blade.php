@@ -13,9 +13,9 @@
                         <h2><a href="/posts/{{$post->id}}">{{$post->title}}</a></h3>
                         <h3 style="color:#3097D1">${{$post->deposit}}</h3>
                         @if($post->inventory)
-                        <h2 style="font-size:30px">剩餘 <b> {!!$post->inventory!!} </b> 個可借用</h2>
+                        <h2 style="font-size:25px">剩餘 <b> {!!$post->inventory!!} </b> 個可借用</h2>
                         @else
-                        <h4>全數外借中</h4>
+                        <h4 style="color:#d22929;font-size:25px">全數外借中</h4>
                         @endif
                         <div style="height:30px"></div>
                         
@@ -29,7 +29,9 @@
                         <input type="hidden" name="id" value="{{$post->id}}">
                         <input type="hidden" name="name" value="{{$post->title}}">
                         <input type="hidden" name="price" value="{{$post->deposit}}">
+                        @if($post->inventory)
                         <example-component min="1" max="{{$post->inventory}}"></example-component>
+                        @endif
                         </form>
                     </div>
 
