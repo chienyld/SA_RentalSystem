@@ -49,17 +49,7 @@ class CartController extends Controller
         $price = $request->input('price');
         $qty = $request->input('qty');
 
-        /*$customAttributes = [
-            'color_attr' => [
-                'label' => 'red',
-                'price' => 10.00,
-            ],
-            'size_attr' => [
-                'label' => 'xxl',
-                'price' => 15.00,
-            ]
-        ];*/
-        if ($inventory>=$qty){
+        if ($inventory>=$qty && $qty>0){
 
         $item = \Cart::session($userId)->add($id, $name, $price, $qty);
 
@@ -68,7 +58,11 @@ class CartController extends Controller
             'data' => $item,
             'message' => "item added."
         ),201,[]);*/
-        return view('/cart');
+        return view('/cart')->with(array(
+            'success' => true,
+            'data' => $item,
+            'message' => "item added."
+        ),201,[]);
         }
         else{
         //return redirect('/posts');    

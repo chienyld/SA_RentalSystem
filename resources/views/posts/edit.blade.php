@@ -4,24 +4,24 @@
     <h1>Edit Post</h1>
     {!! Form::open(['action' => ['App\Http\Controllers\PostsController@update', $post->id], 'method' => 'POST', 'enctype' => 'multipart/form-data']) !!}
         <div class="form-group">
-            {{Form::label('title', 'Title')}}
+            {{Form::label('title', '品項')}}
             {{Form::text('title', $post->title, ['class' => 'form-control', 'placeholder' => '名稱'])}}
         </div>
         <div class="form-group">
-            {{Form::label('deposit', 'Deposit')}}
+            {{Form::label('deposit', '押金')}}
             {{Form::number('deposit', 'value', ['class' => 'form-control', 'placeholder' => '押金'])}}
         </div>
         <div class="form-group">
-            {{Form::label('inventory', 'Inventory')}}
+            {{Form::label('inventory', '數量')}}
             {{Form::number('inventory', 'value', ['class' => 'form-control', 'placeholder' => '此為當前可外借數量 非器材總數量'])}}
         </div>
         <div class="form-group">
             {{Form::label('type', 'Type')}}<br>
-            {{Form::label('type', 'Type0')}}
+            {{Form::label('type', 'Ａ')}}
             {{Form::radio('type', '0', ['class' => 'form-control'])}}
-            {{Form::label('type', 'Type1')}}
+            {{Form::label('type', 'Ｂ')}}
             {{Form::radio('type', '1', ['class' => 'form-control'])}}
-            {{Form::label('type', 'Type2')}}
+            {{Form::label('type', '場地')}}
             {{Form::radio('type', '2', ['class' => 'form-control'])}}
         </div>
         <div class="form-group">
