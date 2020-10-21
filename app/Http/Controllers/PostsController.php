@@ -195,7 +195,12 @@ class PostsController extends Controller
 
         // Update Post
         $borrow = Borrow::find($id);
+        if($borrow){
         $letting=$borrow->qty;
+        }
+        else{
+        $letting=0;    
+        }
         $post->title = $request->input('title');
         $post->body = $request->input('body');
         $post->type = $request->input('type');
