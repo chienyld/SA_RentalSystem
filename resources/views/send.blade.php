@@ -15,7 +15,8 @@
                                 <th>申請單位</th>
                                 <th>品項</th>
                                 <th>數量</th>
-                                <th>申請日期</th>
+                                <th>借取日期</th>
+                                <th>歸還日期</th>
                                 <th>狀態</th>
                                 <th></th>
                                 
@@ -27,7 +28,8 @@
                                     <td>{{$borrow->user_name}}</td>
                                     <td>{{$borrow->name}}</td>
                                     <td>{{$borrow->qty}}</td>
-                                    <td>{{$borrow->created_at}}</td> 
+                                    <td>{{$borrow->borrow_date}}</td> 
+                                    <td>{{$borrow->return_date}}</td> 
                                     <td>
                                     <div class="row">
                                     <div class="col-lg-6">

@@ -4,15 +4,16 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-
+    
     <title>List</title>
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
 </head>
 <body>
 @include('inc.navbar')
-<div class="row" id="app">
-    <div class="row" style="margin: 2rem">
-            <div class="col-lg-6 col-lg-offset-3" style="">
+<div id="app">
+    <div class="container">
+            <div class="col-lg-6 col-lg-offset-3">
                 <h2>我的清單</h2>
                 <table class="table">
                     <thead>
@@ -55,6 +56,22 @@
                         <td>@{{ '$' + details.total.toFixed(2) }} </td>
                     </tr>
                 </table>
+                <br>
+                <el-date-picker
+                    v-model="value2"
+                    format="yyyy-MM-dd" 
+                    value-format="yyyy-MM-dd" 
+                    type="date"
+                    placeholder="借取日期">
+                </el-date-picker>
+                <br>
+                <el-date-picker
+                    v-model="value1"
+                    format="yyyy-MM-dd" 
+                    value-format="yyyy-MM-dd" 
+                    type="date"
+                    placeholder="歸還日期">
+                </el-date-picker>
                 <button v-on:click="sendItem()" class="btn-primary">送出申請</button>
         
         </div>
@@ -70,7 +87,7 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
-
+<script src="https://unpkg.com/element-ui/lib/index.js"></script>
 <script>
     (function($) {
         var _token = '<?php echo csrf_token() ?>';
@@ -78,6 +95,33 @@
             var app = new Vue({
                 el: '#app',
                 data: {
+                    pickerOptions: {
+                        disabledDate(time) {
+                            return time.getTime() > Date.now();
+                        },
+                        shortcuts: [{
+                            text: '今天',
+                            onClick(picker) {
+                            picker.$emit('pick', new Date());
+                            }
+                        }, {
+                            text: '昨天',
+                            onClick(picker) {
+                            const date = new Date();
+                            date.setTime(date.getTime() - 3600 * 1000 * 24);
+                            picker.$emit('pick', date);
+                            }
+                        }, {
+                            text: '一周前',
+                            onClick(picker) {
+                            const date = new Date();
+                            date.setTime(date.getTime() - 3600 * 1000 * 24 * 7);
+                            picker.$emit('pick', date);
+                            }
+                        }]
+                        },
+                        value1: '',
+                        value2: '',
                     details: {
                         sub_total: 0,
                         total: 0,
@@ -132,18 +176,21 @@
                             console.log(item.name);
                             console.log(item.price);
                             console.log(item.quantity);
+                            console.log(_this.value2);
+                            console.log(_this.value1);
                             console.log(_token);
                             _this.$http.post('/borrows',{
                             _token:_token,
                             id:item.id,
                             name:item.name,
                             deposit:item.price,
-                            qty:item.quantity
+                            qty:item.quantity,
+                            borrowdate:_this.value2,
+                            returndate:_this.value1
                         }).then(function(success) {
                             _this.removeItem(item.id);
                             console.log(item);
-                            alert(item.name+'申請成功，請於隔日中午至學務處領取！');
-
+                            alert(item.name+'申請成功！請於'+_this.value2+'中午至學物處領取');
                         }, function(error) {
                             console.log(error)
                         });

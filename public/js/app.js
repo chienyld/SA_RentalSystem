@@ -37821,6 +37821,7 @@ var render = function() {
     _c("button", {
       staticClass: "statusbtn btn",
       class: _vm.actionButton,
+      staticStyle: { "padding-right": "19px", "padding-left": "19px" },
       domProps: { textContent: _vm._s(_vm.statusText) }
     })
   ])

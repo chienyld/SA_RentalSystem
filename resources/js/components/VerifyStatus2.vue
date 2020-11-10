@@ -1,6 +1,6 @@
 <template>
 <div>
-    <button class="statusbtn btn" v-bind:class="actionButton" v-text="statusText"></button>
+    <button class="statusbtn btn" v-bind:class="actionButton" v-text="statusText" style="padding-right:19px;padding-left:19px"></button>
 </div>
 </template>
 

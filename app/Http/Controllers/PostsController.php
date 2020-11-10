@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Facades\Image;
 use App\Models\Post;
+use App\Models\Borrow;
 use DB;
 
 class PostsController extends Controller
@@ -101,10 +102,12 @@ class PostsController extends Controller
         }
 
         // Create Post
+        
         $post = new Post;
         $post->title = $request->input('title');
         $post->deposit = $request->input('deposit');
         $post->inventory = $request->input('inventory');
+        $post->total = $request->input('inventory');
         $post->type = $request->input('type');
         $post->body = $request->input('body');
         $post->user_id = auth()->user()->id;
@@ -142,7 +145,8 @@ class PostsController extends Controller
         }
 
         // Check for correct user
-        if(auth()->user()->id !==$post->user_id){
+        //if(auth()->user()->id !==$post->user_id){
+        if(auth()->user()->privilege !=='sa_admin'){
             return redirect('/posts')->with('error', 'Unauthorized Page');
         }
 
@@ -190,11 +194,19 @@ class PostsController extends Controller
         }
 
         // Update Post
+        $borrow = Borrow::find($id);
+        if($borrow){
+        $letting=$borrow->qty;
+        }
+        else{
+        $letting=0;    
+        }
         $post->title = $request->input('title');
         $post->body = $request->input('body');
         $post->type = $request->input('type');
         $post->deposit = $request->input('deposit');
         $post->inventory = $request->input('inventory');
+        $post->total = $request->input('inventory')+$letting;
         if($request->hasFile('cover_image')){
             $post->cover_image = $fileNameToStore;
         }
@@ -219,7 +231,7 @@ class PostsController extends Controller
         }
 
         // Check for correct user
-        if(auth()->user()->id !==$post->user_id){
+        if(auth()->user()->privilege !=='sa_admin'){
             return redirect('/posts')->with('error', 'Unauthorized Page');
         }
 
