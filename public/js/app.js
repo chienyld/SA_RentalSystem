@@ -37725,7 +37725,7 @@ var render = function() {
       }
     }),
     _vm._v(" "),
-    this.amt
+    this.amt > 0
       ? _c("input", {
           staticClass: "btn-primary col-12",
           staticStyle: { margin: "8px" },

@@ -48,6 +48,7 @@ class CartController extends Controller
         $name = $request->input('name');
         $price = $request->input('price');
         $qty = $request->input('qty');
+        if ($qty>0){
 
         /*$customAttributes = [
             'color_attr' => [
@@ -73,6 +74,10 @@ class CartController extends Controller
         else{
         //return redirect('/posts');    
         return redirect()->back() ->with('alert', '請輸入有效數值！');
+        }
+        }
+        else{
+        return redirect()->back() ->with('alert', '請輸入有效數值！');    
         }
     }
 
