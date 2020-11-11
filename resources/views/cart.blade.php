@@ -57,21 +57,23 @@
                     </tr>
                 </table>
                 <br>
+                <div style="padding-left:0px;padding-right:0px;padding-bottom:5px;margin:0" class="col-lg-6 col-sm-12">
                 <el-date-picker
                     v-model="value2"
                     format="yyyy-MM-dd" 
                     value-format="yyyy-MM-dd" 
                     type="date"
-                    placeholder="借取日期">
-                </el-date-picker>
-                <br>
+                    placeholder="借取日期" style="width: 99%">
+                </el-date-picker><br></div>
+                <div style="padding-left:0px;padding-right:0px;padding-bottom:5px;margin:0" class="col-lg-6 col-sm-12">
                 <el-date-picker
                     v-model="value1"
                     format="yyyy-MM-dd" 
                     value-format="yyyy-MM-dd" 
                     type="date"
-                    placeholder="歸還日期">
-                </el-date-picker>
+                    placeholder="歸還日期" style="width: 99%">
+                </el-date-picker><br></div>
+                <div style="height"></div>
                 <button v-on:click="sendItem()" class="btn-primary">送出申請</button>
         
         </div>
