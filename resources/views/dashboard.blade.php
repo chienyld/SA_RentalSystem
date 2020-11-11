@@ -5,7 +5,7 @@
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
-                <div class="panel-heading">主控版</div>
+                <div class="panel-heading">主控板</div>
 
                 <div class="panel-body">
                     <a href="/posts/create" class="btn btn-primary">新增項目</a>

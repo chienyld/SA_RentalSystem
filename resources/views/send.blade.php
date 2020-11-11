@@ -5,10 +5,10 @@
     <div class="row">
         <div>
             <div class="panel panel-default">
-                <div class="panel-heading">Borrow</div>
+                <div class="panel-heading">外借狀況</div>
 
                 <div class="panel-body">
-                    <h3>Your Borrows</h3>
+                    <h3>Borrows</h3>
                     @if($borrows)
                         <table class="table table-striped">
                             <tr>
@@ -40,7 +40,7 @@
                                         <verify-status datastatus="{{ $borrow->status }}" dataid="{{ $borrow->id }}" dataitem="{{ $borrow->borrow_id }}" dataqty="{{ $borrow->qty }}"></verify-status>
                                         @else
                                         <div v-if="{{$borrow->status}}">器材已完成歸還，感謝使用本系統</div>
-                                        <div v-else>器材借用申請成功，請於明日中午至學務處領取器材</div>
+                                        <div v-else>器材借用申請成功，請於填寫日期時段至學務處領取器材</div>
                                         @endif
                                     </div>
                                     </div>

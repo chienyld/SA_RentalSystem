@@ -63,6 +63,7 @@
                     format="yyyy-MM-dd" 
                     value-format="yyyy-MM-dd" 
                     type="date"
+                    :picker-options="pickerOptions"
                     placeholder="借取日期" style="width: 99%">
                 </el-date-picker><br></div>
                 <div style="padding-left:0px;padding-right:0px;padding-bottom:5px;margin:0" class="col-lg-6 col-sm-12">
@@ -71,9 +72,13 @@
                     format="yyyy-MM-dd" 
                     value-format="yyyy-MM-dd" 
                     type="date"
-                    placeholder="歸還日期" style="width: 99%">
-                </el-date-picker><br></div>
-                <div style="height"></div>
+                    placeholder="歸還日期" 
+                    :picker-options="pickerOptions"
+                    style="width: 99%">
+                </el-date-picker></div><br><br><br>
+                <div class="container">
+                &nbsp<input type="radio" v-model="time" v-bind:value="12"> 中午 １２ 點 &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+                <input type="radio" v-model="time" v-bind:value="18"> 下午 １８ 點</div><br><br>
                 <button v-on:click="sendItem()" class="btn-primary">送出申請</button>
         
         </div>
@@ -99,7 +104,7 @@
                 data: {
                     pickerOptions: {
                         disabledDate(time) {
-                            return time.getTime() > Date.now();
+                            return time.getTime() < Date.now();
                         },
                         shortcuts: [{
                             text: '今天',
@@ -124,6 +129,7 @@
                         },
                         value1: '',
                         value2: '',
+                        time:'',
                     details: {
                         sub_total: 0,
                         total: 0,
@@ -188,11 +194,12 @@
                             deposit:item.price,
                             qty:item.quantity,
                             borrowdate:_this.value2,
-                            returndate:_this.value1
+                            returndate:_this.value1,
+                            time_period:_this.time
                         }).then(function(success) {
                             _this.removeItem(item.id);
                             console.log(item);
-                            alert(item.name+'申請成功！請於'+_this.value2+'中午至學物處領取');
+                            alert(item.name+'申請成功！請於'+_this.value2+" 當日"+_this.time+'點至學物處領取');
                         }, function(error) {
                             console.log(error)
                         });

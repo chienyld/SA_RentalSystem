@@ -28,6 +28,7 @@ Vue.component('example-component', require('./components/ExampleComponent.vue').
 Vue.component('follow-button', require('./components/FollowButton.vue').default);
 Vue.component('verify-status', require('./components/VerifyStatus.vue').default);
 Vue.component('verify-status2', require('./components/VerifyStatus2.vue').default);
+Vue.component('user-type', require('./components/UserType.vue').default);
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application

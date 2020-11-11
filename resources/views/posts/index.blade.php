@@ -2,7 +2,15 @@
 
 @section('content')
     <h2>租借項目</h2>
-    @if(count($posts) > 0)
+    @if(count($posts) > 0)    
+                @auth
+                @if(! Auth::user()->active)
+                <div class="container" style="background-color: #ff8b8b;border-radius:5px;width:100%;margin-bottom:10px">
+                    <div><h4>帳號可能已被停權，請聯絡學生會。</h4></div>
+                </div>
+                
+                @endif
+                @endauth 
         @foreach($posts as $post)
             <div class="well">
                 <div class="row">

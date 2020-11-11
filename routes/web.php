@@ -35,7 +35,7 @@ Route::get('/type2', 'App\Http\Controllers\PostsController@type2');
 Route::resource('posts', 'App\Http\Controllers\PostsController');
 Route::resource('borrows', 'App\Http\Controllers\SendController');
 
-Route::get('/dashboard', 'App\Http\Controllers\DashboardController@index')->middleware('verified');
+Route::get('/dashboard', 'App\Http\Controllers\DashboardController@index')->middleware('verified','active','admin');
 
 Auth::routes();
 
@@ -45,17 +45,19 @@ Route::get('/home', 'App\Http\Controllers\PostsController@index')->name('home');
 Route::get('/profile/{user}/edit', 'App\Http\Controllers\ProfilesController@edit')->name('profile.edit');
 Route::patch('/profile/{user}', 'App\Http\Controllers\ProfilesController@update')->name('profile.update');*/
 
-Route::get('/cart','App\Http\Controllers\CartController@index')->name('cart.index');
-Route::post('/cart','App\Http\Controllers\CartController@add')->name('cart.add')->middleware('verified');
-Route::post('/cart/conditions','App\Http\Controllers\CartController@addCondition')->name('cart.addCondition');
-Route::delete('/cart/conditions','App\Http\Controllers\CartController@clearCartConditions')->name('cart.clearCartConditions');
-Route::get('/cart/details','App\Http\Controllers\CartController@details')->name('cart.details');
-Route::delete('/cart/{id}','App\Http\Controllers\CartController@delete')->name('cart.delete');
+Route::get('/cart','App\Http\Controllers\CartController@index')->name('cart.index')->middleware('verified','active');
+Route::post('/cart','App\Http\Controllers\CartController@add')->name('cart.add')->middleware('verified','active');
+Route::post('/cart/conditions','App\Http\Controllers\CartController@addCondition')->name('cart.addCondition')->middleware('verified','active');
+Route::delete('/cart/conditions','App\Http\Controllers\CartController@clearCartConditions')->name('cart.clearCartConditions')->middleware('verified','active');
+Route::get('/cart/details','App\Http\Controllers\CartController@details')->name('cart.details')->middleware('verified','active');
+Route::delete('/cart/{id}','App\Http\Controllers\CartController@delete')->name('cart.delete')->middleware('verified','active');
 
-Route::post('/borrows','App\Http\Controllers\SendController@store');
+Route::post('/borrows','App\Http\Controllers\SendController@store')->middleware('verified','active');
 
 Route::get('/send','App\Http\Controllers\SendController@index')->middleware('verified');
-Route::post('/send/{id}','App\Http\Controllers\SendController@verify');
+Route::post('/send/{id}','App\Http\Controllers\SendController@verify')->middleware('verified','active');
 
+Route::get('/account','App\Http\Controllers\AccountController@index')->middleware('verified','active','admin');
+Route::post('/account/edit','App\Http\Controllers\AccountController@edit')->middleware('verified','active','admin');
 
 

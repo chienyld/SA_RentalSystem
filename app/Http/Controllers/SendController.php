@@ -65,6 +65,7 @@ class SendController extends Controller
             'qty' => 'required',
             'returndate' => 'required',
             'borrowdate' => 'required',
+            'time_period' => 'required',
         ]);
         
         $borrow=new Borrow;
@@ -76,6 +77,7 @@ class SendController extends Controller
         $borrow->qty = $request->input('qty');
         $borrow->borrow_date = $request->input('borrowdate');
         $borrow->return_date = $request->input('returndate');
+        $borrow->time_period = $request->input('time_period');
         $borrow->status = false;
         $borrow->save();
 
