@@ -22,6 +22,7 @@ class CreateBorrowTable extends Migration
             $table->bigInteger('qty');
             $table->date('borrow_date');
             $table->date('return_date');
+            $table->integer('time_period');
             $table->integer('status');
             $table->timestamps();
             //$table->primary('id');
