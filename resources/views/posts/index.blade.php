@@ -1,16 +1,22 @@
 @extends('layouts.app')
 
 @section('content')
+    @auth
+    @if(! Auth::user()->active)
+        <div class="container" style="background-color: #ff8b8b;border-radius:5px;width:100%;margin-bottom:10px">
+            <div><h4>帳號可能已被停權，請聯絡學生會。</h4></div>
+        </div>  
+    @endif
+    @endauth 
+
+    @if($bulletin->content)
+    <div class="container" style="background-color: #f0f0f0;border-radius:5px;width:100%;margin-bottom:10px">
+        <div class="form-group"><h5>{{ $bulletin->content }}</h5></div>
+    </div>  
+    @endif
+
     <h2>租借項目</h2>
     @if(count($posts) > 0)    
-                @auth
-                @if(! Auth::user()->active)
-                <div class="container" style="background-color: #ff8b8b;border-radius:5px;width:100%;margin-bottom:10px">
-                    <div><h4>帳號可能已被停權，請聯絡學生會。</h4></div>
-                </div>
-                
-                @endif
-                @endauth 
         @foreach($posts as $post)
             <div class="well">
                 <div class="row">

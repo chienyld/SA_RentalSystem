@@ -8,7 +8,6 @@
                 <div class="panel-heading">主控版</div>
 
                 <div class="panel-body">
-                    <a href="/posts/create" class="btn btn-primary">新增項目</a>
                     <h3>帳戶管理</h3>
                     @if($accounts)
                         <table class="table table-striped">

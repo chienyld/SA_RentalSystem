@@ -12,7 +12,7 @@
             </button>
 
             <!-- Branding Image -->
-            <a style="font-size:15px" class="navbar-brand" href="{{ url('/') }}">
+            <a style="font-size:15px;color:#fff" class="navbar-brand" href="{{ url('/') }}">
                 {{ config('app.name', '中山醫學大學學生會') }}
             </a>
         </div>
@@ -50,6 +50,8 @@
                             <li><a href="/cart">我的清單</a></li>
                             @if(Auth::user()->privilege=='sa_admin')
                             <li><a href="/dashboard">品項管理</a></li>
+                            <li><a href="/bulletin">公告管理</a></li>
+                            <li><a href="/account">帳戶管理</a></li>
                             @endif
                             <li>
                                 <a href="{{ route('logout') }}"

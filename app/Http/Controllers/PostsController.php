@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Facades\Image;
 use App\Models\Post;
 use App\Models\Borrow;
+use App\Models\Bulletin;
 use DB;
 
 class PostsController extends Controller
@@ -33,22 +34,25 @@ class PostsController extends Controller
         //$posts = DB::select('SELECT * FROM posts');
         //$posts = Post::orderBy('title','desc')->take(1)->get();
         //$posts = Post::orderBy('title','desc')->get();
-
+        $bulletin = Bulletin::find(1);
         $posts = Post::orderBy('created_at','desc')->paginate(10);
         
-        return view('posts.index')->with('posts', $posts);
+        return view('posts.index')->with('posts', $posts)->with('bulletin', $bulletin);
     }
     public function type0(){
+        $bulletin = Bulletin::find(1);
         $posts0 = Post::orderBy('created_at','desc')->where('type', '0')->paginate(10);
-        return view('posts.index')->with('posts', $posts0);
+        return view('posts.index')->with('posts', $posts0)->with('bulletin', $bulletin);
     }
     public function type1(){
+        $bulletin = Bulletin::find(1);
         $posts1 = Post::orderBy('created_at','desc')->where('type', '1')->paginate(10);
-        return view('posts.index')->with('posts', $posts1);
+        return view('posts.index')->with('posts', $posts1)->with('bulletin', $bulletin);
     }
     public function type2(){
+        $bulletin = Bulletin::find(1);
         $posts2 = Post::orderBy('created_at','desc')->where('type', '2')->paginate(10);
-        return view('posts.index')->with('posts', $posts2);
+        return view('posts.index')->with('posts', $posts2)->with('bulletin', $bulletin);
     }
 
     /**

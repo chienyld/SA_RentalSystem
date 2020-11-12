@@ -54,6 +54,7 @@
                     @else
                         <p>You have no borrows</p>
                     @endif
+                    {{$borrows->links()}}
                 </div>
             </div>
         </div>

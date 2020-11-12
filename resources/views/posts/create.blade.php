@@ -16,7 +16,7 @@
             {{Form::number('inventory', 'value', ['class' => 'form-control', 'placeholder' => 'inventory'])}}
         </div>
         <div class="form-group">
-            {{Form::label('type', '類別'')}}<br>
+            {{Form::label('type', '類別')}}<br>
             {{Form::label('type', 'Ａ')}}
             {{Form::radio('type', '0', ['class' => 'form-control'])}}
             {{Form::label('type', 'Ｂ')}}

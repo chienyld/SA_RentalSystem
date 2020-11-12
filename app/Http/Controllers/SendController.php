@@ -35,7 +35,7 @@ class SendController extends Controller
         //$posts = Post::orderBy('title','desc')->take(1)->get();
         //$posts = Post::orderBy('title','desc')->get();
 
-        $borrows = Borrow::orderBy('id','desc')->paginate(10);
+        $borrows = Borrow::orderBy('id','desc')->paginate(15);
         
         return view('/send')->with('borrows', $borrows);
     }

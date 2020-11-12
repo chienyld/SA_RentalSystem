@@ -60,4 +60,7 @@ Route::post('/send/{id}','App\Http\Controllers\SendController@verify')->middlewa
 Route::get('/account','App\Http\Controllers\AccountController@index')->middleware('verified','active','admin');
 Route::post('/account/edit','App\Http\Controllers\AccountController@edit')->middleware('verified','active','admin');
 
+Route::get('/bulletin','App\Http\Controllers\BulletinController@index')->middleware('verified','active','admin');
+Route::post('/bulletin/p','App\Http\Controllers\BulletinController@edit')->middleware('verified','active','admin');
+
 
