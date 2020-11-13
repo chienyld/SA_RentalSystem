@@ -1,3 +1,4 @@
+<!--/* Copyright © 2020 Chien-Yu Lin. All rights reserved.*/-->
 <!DOCTYPE html>
 <html lang="{{ app()->getLocale() }}">
 <head>

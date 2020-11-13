@@ -46,11 +46,6 @@
                         <td>總數量:</td>
                         <td>@{{ details.total_quantity }}</td>
                     </tr>
-                    <!--
-                    <tr>
-                        <td>Sub Total:</td>
-                        <td>@{{ '$' + details.sub_total.toFixed(2) }}</td>
-                    </tr>-->
                     <tr>
                         <td>總押金:</td>
                         <td>@{{ '$' + details.total.toFixed(2) }} </td>
@@ -111,12 +106,6 @@
                         },
                         value1: '',
                         value2: '',
-                    pickerOptions2: {
-                        disabledDate(time) {
-                            let _this_ = this;
-                            return time.getTime() < _this_.value2;
-                        },
-                        },
                         time:'',
                     details: {
                         sub_total: 0,
@@ -171,7 +160,7 @@
                             console.log(item.id);
                             console.log(_this.value1);
                             console.log(_this.value2);
-                            if(_this.value2<_this.value1){
+                            if(_this.value1<=_this.value2){
                                 alert('日期錯誤');
                             }else{
                             _this.$http.post('/borrows',{

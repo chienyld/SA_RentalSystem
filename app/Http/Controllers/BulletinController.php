@@ -15,6 +15,7 @@ class BulletinController extends Controller
 
     public function store(Request $request)
     {
+        
         $bulletin = new Bulletin;
         $bulletin->content = $request->input('content');
         $bulletin->save();
