@@ -76,9 +76,11 @@
                     :picker-options="pickerOptions"
                     style="width: 99%">
                 </el-date-picker></div><br><br><br>
+                <div class="container"></div>
                 <div class="container">
-                &nbsp<input type="radio" v-model="time" v-bind:value="12"> 中午 １２ 點 &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-                <input type="radio" v-model="time" v-bind:value="18"> 下午 １８ 點</div><br><br>
+                <div class="row">
+                <input type="radio" v-model="time" v-bind:value="12"> 中午 １２ 點 &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+                <input type="radio" v-model="time" v-bind:value="18"> 下午 １８ 點</div></div><br><br>
                 <button v-on:click="sendItem()" class="btn-primary">送出申請</button>
         
         </div>
@@ -109,6 +111,12 @@
                         },
                         value1: '',
                         value2: '',
+                    pickerOptions2: {
+                        disabledDate(time) {
+                            let _this_ = this;
+                            return time.getTime() < _this_.value2;
+                        },
+                        },
                         time:'',
                     details: {
                         sub_total: 0,
@@ -161,12 +169,11 @@
                         var _this = this;
                         this.items.forEach(function(item){
                             console.log(item.id);
-                            console.log(item.name);
-                            console.log(item.price);
-                            console.log(item.quantity);
-                            console.log(_this.value2);
                             console.log(_this.value1);
-                            console.log(_token);
+                            console.log(_this.value2);
+                            if(_this.value2<_this.value1){
+                                alert('日期錯誤');
+                            }else{
                             _this.$http.post('/borrows',{
                             _token:_token,
                             id:item.id,
@@ -182,10 +189,10 @@
                             alert(item.name+'申請成功！請於'+_this.value2+" 當日"+_this.time+'點至學物處領取');
                         }, function(error) {
                             console.log(error)
-                        });
+                        });}
                         this.items=[];
                         console.log(items);               
-                        });                        
+                        });                      
                         /*var _this = this;
                         this.$http.post('/borrows',{
                             _token:_token,

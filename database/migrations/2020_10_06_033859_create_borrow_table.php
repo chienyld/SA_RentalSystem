@@ -17,6 +17,7 @@ class CreateBorrowTable extends Migration
             $table->increments('id');
             $table->integer('borrow_id');
             $table->integer('user_id');
+            $table->string('user_name');
             $table->string('name');
             $table->bigInteger('depositamt');
             $table->bigInteger('qty');
