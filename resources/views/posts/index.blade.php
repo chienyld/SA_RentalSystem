@@ -9,7 +9,7 @@
     @endif
     @endauth 
 
-    @if($bulletin->content)
+    @if(isset($bulletin->content))
     <div class="container" style="background-color: #f0f0f0;border-radius:5px;width:100%;margin-bottom:10px">
         <div class="form-group"><h5>{{ $bulletin->content }}</h5></div>
     </div>  
