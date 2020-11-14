@@ -12,16 +12,6 @@ class BulletinController extends Controller
         return view('bulletin');
     }
 
-
-    public function store(Request $request)
-    {
-        
-        $bulletin = new Bulletin;
-        $bulletin->content = $request->input('content');
-        $bulletin->save();
-
-        return redirect('/bulletin')->with('success', 'Bulletin Created');
-    }
     public function edit(Request $request)
     {
 		$bulletin = Bulletin::find(1);
