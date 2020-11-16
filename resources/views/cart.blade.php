@@ -68,7 +68,7 @@
                     value-format="yyyy-MM-dd" 
                     type="date"
                     placeholder="歸還日期" 
-                    :picker-options="pickerOptions"
+                    :picker-options="pickerOptions2"
                     style="width: 99%">
                 </el-date-picker></div><br><br><br>
                 <div class="container"></div>
@@ -77,7 +77,7 @@
                 <input type="radio" v-model="time" v-bind:value="12"> 中午 １２ 點 &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
                 <input type="radio" v-model="time" v-bind:value="18"> 下午 １８ 點</div></div><br><br>
                 <button v-on:click="sendItem()" class="btn-primary">送出申請</button>
-        
+                <p v-text=""></p>
         </div>
     </div>
 </div>
@@ -104,6 +104,12 @@
                             return time.getTime() < Date.now();
                         },
                         },
+                    pickerOptions2: {
+                        disabledDate(time) {
+                            return time.getTime() < this.value;
+                        },
+                        },
+                        value:'',
                         value1: '',
                         value2: '',
                         time:'',
@@ -136,7 +142,13 @@
                         ]
                     }
                 },
+                watch:{
+                    value2: function(values){
+                        value=Date.parse(this.value2);
+                    }
+                },
                 mounted:function(){
+                    var _this=this;
                     this.loadItems();
                 },
                 methods: {
