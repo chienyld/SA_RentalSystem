@@ -1915,14 +1915,32 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   mounted: function mounted() {
     console.log('Component mounted.');
   },
   data: function data() {
     return {
-      amt: ''
+      amt: 0
     };
+  },
+  methods: {
+    increaseValue: function increaseValue() {
+      var value = this.amt;
+      value++;
+      this.amt = value;
+    },
+    decreaseValue: function decreaseValue() {
+      var value = this.amt;
+      value--;
+      this.amt = value;
+    }
   },
   computed: {
     actionButton: function actionButton() {
@@ -37763,29 +37781,81 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "row" }, [
-    _c("input", {
-      directives: [
-        { name: "model", rawName: "v-model", value: _vm.amt, expression: "amt" }
-      ],
-      staticClass: "form-control col-lg-6",
-      staticStyle: { margin: "8px" },
-      attrs: {
-        type: "number",
-        name: "qty",
-        value: "qty",
-        placeholder: "quantity"
+  return _c("div", { staticClass: "container-fluid" }, [
+    _c(
+      "div",
+      {
+        staticClass: "row",
+        staticStyle: { display: "inline-block", float: "left" }
       },
-      domProps: { value: _vm.amt },
-      on: {
-        input: function($event) {
-          if ($event.target.composing) {
-            return
-          }
-          _vm.amt = $event.target.value
-        }
-      }
-    }),
+      [
+        _c(
+          "div",
+          { staticStyle: { width: "15%", float: "left", margin: "1px" } },
+          [
+            _c(
+              "div",
+              {
+                staticClass: "value-button",
+                on: {
+                  click: function($event) {
+                    return _vm.decreaseValue()
+                  }
+                }
+              },
+              [_vm._v("-")]
+            )
+          ]
+        ),
+        _vm._v(" "),
+        _c(
+          "div",
+          { staticStyle: { width: "40%", float: "left", margin: "1px" } },
+          [
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.amt,
+                  expression: "amt"
+                }
+              ],
+              staticClass: "form-control",
+              attrs: { type: "number", value: "qty" },
+              domProps: { value: _vm.amt },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.amt = $event.target.value
+                }
+              }
+            })
+          ]
+        ),
+        _vm._v(" "),
+        _c(
+          "div",
+          { staticStyle: { width: "15%", float: "left", margin: "1px" } },
+          [
+            _c(
+              "div",
+              {
+                staticClass: "value-button",
+                on: {
+                  click: function($event) {
+                    return _vm.increaseValue()
+                  }
+                }
+              },
+              [_vm._v("+")]
+            )
+          ]
+        )
+      ]
+    ),
     _vm._v(" "),
     this.amt > 0
       ? _c("input", {
