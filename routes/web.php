@@ -1,4 +1,5 @@
 <?php
+/* Copyright © 2020 Chien-Yu Lin. All rights reserved.*/
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostsController;
@@ -62,5 +63,4 @@ Route::post('/account/edit','App\Http\Controllers\AccountController@edit')->midd
 
 Route::get('/bulletin','App\Http\Controllers\BulletinController@index')->middleware('verified','active','admin');
 Route::post('/bulletin/p','App\Http\Controllers\BulletinController@edit')->middleware('verified','active','admin');
-
 

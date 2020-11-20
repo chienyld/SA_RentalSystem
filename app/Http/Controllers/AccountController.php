@@ -15,8 +15,8 @@ class AccountController extends Controller
     
     public function index()
     {
-
-        $accounts = User::orderBy('id','desc')->paginate(10);
+        
+        $accounts = User::orderBy('id','desc')->where('id','>','1')->paginate(10);
         
         return view('/account')->with('accounts', $accounts);
     }

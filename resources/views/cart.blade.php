@@ -46,11 +46,6 @@
                         <td>總數量:</td>
                         <td>@{{ details.total_quantity }}</td>
                     </tr>
-                    <!--
-                    <tr>
-                        <td>Sub Total:</td>
-                        <td>@{{ '$' + details.sub_total.toFixed(2) }}</td>
-                    </tr>-->
                     <tr>
                         <td>總押金:</td>
                         <td>@{{ '$' + details.total.toFixed(2) }} </td>
@@ -73,7 +68,7 @@
                     value-format="yyyy-MM-dd" 
                     type="date"
                     placeholder="歸還日期" 
-                    :picker-options="pickerOptions"
+                    :picker-options="pickerOptions2"
                     style="width: 99%">
                 </el-date-picker></div><br><br><br>
                 <div class="container"></div>
@@ -82,7 +77,7 @@
                 <input type="radio" v-model="time" v-bind:value="12"> 中午 １２ 點 &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
                 <input type="radio" v-model="time" v-bind:value="18"> 下午 １８ 點</div></div><br><br>
                 <button v-on:click="sendItem()" class="btn-primary">送出申請</button>
-        
+                <p v-text=""></p>
         </div>
     </div>
 </div>
@@ -109,14 +104,14 @@
                             return time.getTime() < Date.now();
                         },
                         },
-                        value1: '',
-                        value2: '',
                     pickerOptions2: {
                         disabledDate(time) {
-                            let _this_ = this;
-                            return time.getTime() < _this_.value2;
+                            return time.getTime() < this.value;
                         },
                         },
+                        value:'',
+                        value1: '',
+                        value2: '',
                         time:'',
                     details: {
                         sub_total: 0,
@@ -147,7 +142,13 @@
                         ]
                     }
                 },
+                watch:{
+                    value2: function(values){
+                        value=Date.parse(this.value2);
+                    }
+                },
                 mounted:function(){
+                    var _this=this;
                     this.loadItems();
                 },
                 methods: {
@@ -171,7 +172,7 @@
                             console.log(item.id);
                             console.log(_this.value1);
                             console.log(_this.value2);
-                            if(_this.value2<_this.value1){
+                            if(_this.value1<=_this.value2){
                                 alert('日期錯誤');
                             }else{
                             _this.$http.post('/borrows',{
