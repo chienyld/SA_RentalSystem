@@ -15,9 +15,9 @@
   color: #FFF;
   display: inline-block;
   border-radius:50px;
-  margin: 0px;
-  width: 40px;
-  height: 40px;
+  margin:1px 0px 0px 1px;
+  width: 33px;
+  height: 33px;
   text-align: center;
   vertical-align: middle;
   background: #3097D1;
@@ -5836,7 +5836,7 @@ fieldset[disabled] .navbar-default .btn-link:focus {
 }
 
 .navbar-inverse {
-  background-color: #222;
+  background-color: #0f4c81;
   border-color: #090909;
 }
 

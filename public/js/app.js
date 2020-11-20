@@ -1921,6 +1921,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   mounted: function mounted() {
     console.log('Component mounted.');
@@ -37781,36 +37785,36 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "container-fluid" }, [
+  return _c("div", [
     _c(
       "div",
       {
-        staticClass: "row",
-        staticStyle: { display: "inline-block", float: "left" }
+        staticClass: "col-12",
+        staticStyle: {
+          display: "flex",
+          "align-items": "center",
+          "justify-content": "center"
+        }
       },
       [
-        _c(
-          "div",
-          { staticStyle: { width: "15%", float: "left", margin: "1px" } },
-          [
-            _c(
-              "div",
-              {
-                staticClass: "value-button",
-                on: {
-                  click: function($event) {
-                    return _vm.decreaseValue()
-                  }
+        _c("div", { staticStyle: { float: "left", margin: "3px" } }, [
+          _c(
+            "div",
+            {
+              staticClass: "value-button",
+              on: {
+                click: function($event) {
+                  return _vm.decreaseValue()
                 }
-              },
-              [_vm._v("-")]
-            )
-          ]
-        ),
+              }
+            },
+            [_vm._v("-")]
+          )
+        ]),
         _vm._v(" "),
         _c(
           "div",
-          { staticStyle: { width: "40%", float: "left", margin: "1px" } },
+          { staticStyle: { width: "63%", float: "left", margin: "3px" } },
           [
             _c("input", {
               directives: [
@@ -37822,6 +37826,7 @@ var render = function() {
                 }
               ],
               staticClass: "form-control",
+              staticStyle: { "border-radius": "45px" },
               attrs: { type: "number", value: "qty" },
               domProps: { value: _vm.amt },
               on: {
@@ -37836,34 +37841,49 @@ var render = function() {
           ]
         ),
         _vm._v(" "),
-        _c(
-          "div",
-          { staticStyle: { width: "15%", float: "left", margin: "1px" } },
-          [
-            _c(
-              "div",
-              {
-                staticClass: "value-button",
-                on: {
-                  click: function($event) {
-                    return _vm.increaseValue()
-                  }
+        _c("div", { staticStyle: { float: "left", margin: "3px" } }, [
+          _c(
+            "div",
+            {
+              staticClass: "value-button",
+              on: {
+                click: function($event) {
+                  return _vm.increaseValue()
                 }
-              },
-              [_vm._v("+")]
-            )
-          ]
-        )
+              }
+            },
+            [_vm._v("+")]
+          )
+        ])
       ]
     ),
     _vm._v(" "),
-    this.amt > 0
-      ? _c("input", {
-          staticClass: "btn-primary col-12",
-          staticStyle: { margin: "8px" },
-          attrs: { type: "submit", value: "加入清單" }
-        })
-      : _vm._e()
+    _c(
+      "div",
+      {
+        staticClass: "col-12",
+        staticStyle: {
+          display: "flex",
+          "align-items": "center",
+          "justify-content": "center"
+        }
+      },
+      [
+        _c(
+          "div",
+          { staticStyle: { width: "100vh", padding: "30px 95px 0px 95px" } },
+          [
+            this.amt > 0
+              ? _c("input", {
+                  staticClass: "btn-primary col-10 offset-1",
+                  staticStyle: { "border-radius": "50px" },
+                  attrs: { type: "submit", value: "加入清單" }
+                })
+              : _vm._e()
+          ]
+        )
+      ]
+    )
   ])
 }
 var staticRenderFns = []

@@ -20,25 +20,26 @@
         @foreach($posts as $post)
             <div class="well">
                 <div class="row">
-                    <div class="col-md-4 col-sm-4">
+                    <div class="col-lg-4 col-sm-12">
                         <img style="width:100%" src="/storage/cover_images/{{$post->cover_image}}">
                     </div>
-                    <div class="col-md-8 col-sm-8">
-                        <h2><a href="/posts/{{$post->id}}">{{$post->title}}</a></h3>
-                        <h3 style="color:#3097D1">${{$post->deposit}}</h3>
-                        @if($post->inventory)
-                        <h2 style="font-size:25px">剩餘 <b> {!!$post->inventory!!} </b> 個可借用</h2>
-                        @else
-                        <h4 style="color:#d22929;font-size:25px">全數外借中</h4>
-                        @endif
-                        <div style="height:30px"></div>
-                        
-                        <form action="{{ url('/cart') }}" method="POST" class="col-4">
+                    <div class="col-lg-8 col-sm-12" style="padding-top: 30px">
+                        <div style="margin-left:20%">
+                            <h2><a href="/posts/{{$post->id}}">{{$post->title}}</a></h2>
+                            <h3 style="color:#53575b">${{$post->deposit}}</h3>
+                            @if($post->inventory)
+                            <h2 style="font-size:20px">剩餘 <b> {!!$post->inventory!!} </b> 個可借用</h2>
+                            @else
+                            <h4 style="color:#df4c4c;font-size:25px">全數外借中</h4>
+                            @endif
+                            <div style="height:15px"></div>
+                        </div>
+                        <form action="{{ url('/cart') }}" method="POST">
                         
                         {!! csrf_field() !!}
                         @auth
                         
-                        @endauth
+                        
                         <input type="hidden" name="inventory" value="{{$post->inventory}}">
                         <input type="hidden" name="id" value="{{$post->id}}">
                         <input type="hidden" name="name" value="{{$post->title}}">
@@ -46,6 +47,7 @@
                         @if($post->inventory)
                         <example-component min="1" max="{{$post->inventory}}"></example-component>
                         @endif
+                        @endauth
                         </form>
                     </div>
 
