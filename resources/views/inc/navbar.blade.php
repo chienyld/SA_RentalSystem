@@ -33,9 +33,18 @@
               <li><a href="/send">外借狀況</a></li>
               
             </ul>
-
+            <form name="form1" action="/search" method="post">
+            <div class="search-box" media="screen and (min-width: 400px) and (max-width: 700px)">
+                <input class="search-txt" type="text" name="keyword" placeholder=" Search">
+                <a href='javascript:document.form1.submit()' class="search-btn" style="text-decoration: none;">
+                <i class="fas fa-search"></i>
+                </a>
+            </div>
+            </form>
             <!-- Right Side Of Navbar -->
             <ul class="nav navbar-nav navbar-right">
+            
+            
                 <!-- Authentication Links -->
                 @if (Auth::guest())
                     <li><a href="{{ route('login') }}">Login</a></li>

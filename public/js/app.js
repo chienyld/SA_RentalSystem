@@ -37827,7 +37827,7 @@ var render = function() {
               ],
               staticClass: "form-control",
               staticStyle: { "border-radius": "45px" },
-              attrs: { type: "number", value: "qty" },
+              attrs: { name: "qty", type: "number", value: "qty" },
               domProps: { value: _vm.amt },
               on: {
                 input: function($event) {
@@ -52212,8 +52212,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /Applications/MAMP/htdocs/lara8/resources/js/app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! /Applications/MAMP/htdocs/lara8/resources/css/app.css */"./resources/css/app.css");
+__webpack_require__(/*! /Applications/MAMP/htdocs/StudentAffairs/resources/js/app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! /Applications/MAMP/htdocs/StudentAffairs/resources/css/app.css */"./resources/css/app.css");
 
 
 /***/ }),

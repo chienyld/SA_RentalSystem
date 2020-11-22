@@ -26,7 +26,7 @@ class DatabaseSeeder extends Seeder
         User::create([
             'name' => 'chien',
             'privilege' => 'sa_admin',
-            'email' => 'chien@chienyldesign.com',
+            'email' => 'chien@chienyld.github.io',
             'email_verified_at' => '2020-11-08 00:30:00',
             'password' => Hash::make('00000000'),
         ]);

@@ -25,6 +25,7 @@
 
     <!--     <script src="/vendor/unisharp/laravel-ckeditor/ckeditor.js"></script> -->
     <script src="{{ asset('js/app.js') }}"></script>
+    <script src="https://kit.fontawesome.com/4e4ab773fc.js" crossorigin="anonymous"></script>
     <script>
     var msg = '{{Session::get('alert')}}';
     var exist = '{{Session::has('alert')}}';

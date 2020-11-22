@@ -32,6 +32,9 @@ Route::get('/about', 'App\Http\Controllers\PagesController@about');
 Route::get('/type0', 'App\Http\Controllers\PostsController@type0');
 Route::get('/type1', 'App\Http\Controllers\PostsController@type1');
 Route::get('/type2', 'App\Http\Controllers\PostsController@type2');
+Route::get('/search', 'App\Http\Controllers\PostsController@index');
+
+Route::post('/search', 'App\Http\Controllers\PostsController@search');
 
 Route::resource('posts', 'App\Http\Controllers\PostsController');
 Route::resource('borrows', 'App\Http\Controllers\SendController');

@@ -5,10 +5,10 @@
     <div class="row">
         <div>
             <div class="panel panel-default">
-                <div class="panel-heading">外借狀況</div>
+                <div class="panel-heading">器材外借狀況</div>
 
                 <div class="panel-body">
-                    <h3>Borrows</h3>
+                    <!--<h3>Borrows</h3>-->
                     @if($borrows)
                         <table class="table table-striped">
                             <tr>

@@ -3,15 +3,15 @@
 @section('content')
     @auth
     @if(! Auth::user()->active)
-        <div class="container" style="background-color: #ff8b8b;border-radius:5px;width:100%;margin-bottom:10px">
-            <div><h4>帳號可能已被停權，請聯絡學生會。</h4></div>
+        <div class="well" style="background-color: #ff7a7a;color:#333333">
+            <h4>此帳號可能已被停權，請聯絡學生會。</h4>
         </div>  
     @endif
     @endauth 
 
     @if(isset($bulletin->content))
-    <div class="container" style="background-color: #f0f0f0;border-radius:5px;width:100%;margin-bottom:10px">
-        <div class="form-group"><h5>{{ $bulletin->content }}</h5></div>
+    <div class="well" >
+        <div><h5>{{ $bulletin->content }}</h5></div>
     </div>  
     @endif
 
@@ -21,7 +21,7 @@
             <div class="well">
                 <div class="row">
                     <div class="col-lg-4 col-sm-12">
-                        <img style="width:100%" src="/storage/cover_images/{{$post->cover_image}}">
+                        <img style="width:100%;padding-left:30px;padding-right:30px" src="/storage/cover_images/{{$post->cover_image}}">
                     </div>
                     <div class="col-lg-8 col-sm-12" style="padding-top: 30px">
                         <div style="margin-left:20%">

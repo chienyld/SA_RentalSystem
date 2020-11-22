@@ -54,6 +54,15 @@ class PostsController extends Controller
         $posts2 = Post::orderBy('created_at','desc')->where('type', '2')->paginate(10);
         return view('posts.index')->with('posts', $posts2)->with('bulletin', $bulletin);
     }
+    public function search(Request $request){
+        $this->validate($request, [
+            'keyword' => 'required'
+        ]);
+        $keyword = $request->input('keyword');
+        $bulletin = Bulletin::find(1);
+        $search = Post::orderBy('created_at','desc')->where('title', 'like', '%' . $keyword . '%' )->paginate(10);
+        return view('posts.index')->with('posts', $search)->with('bulletin', $bulletin);
+    }
 
     /**
      * Show the form for creating a new resource.
