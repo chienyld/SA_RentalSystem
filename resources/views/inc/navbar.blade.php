@@ -61,6 +61,7 @@
                             @if(Auth::user()->privilege=='sa_admin')
                             <li><a href="/dashboard">品項管理</a></li>
                             <li><a href="/bulletin">公告管理</a></li>
+                            <li><a href="/rules">借用規則</a></li>
                             <li><a href="/account">帳戶管理</a></li>
                             @endif
                             <li>

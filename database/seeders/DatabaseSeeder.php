@@ -22,6 +22,9 @@ class DatabaseSeeder extends Seeder
         Bulletin::create([
             'content' => '這是公告告',
         ]);
+        Bulletin::create([
+            'content' => '這是借用規則',
+        ]);
         User::truncate();
         User::create([
             'name' => 'chien',

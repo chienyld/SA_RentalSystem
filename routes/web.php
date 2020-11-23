@@ -28,7 +28,7 @@ Route::get('/', function () {
 Auth::routes(['verify' => true]);
 //Route::get('/home', 'HomeController@index')->middleware('verified');
 Route::get('/', 'App\Http\Controllers\PostsController@index');
-Route::get('/about', 'App\Http\Controllers\PagesController@about');
+Route::get('/about', 'App\Http\Controllers\RulesController@index');
 Route::get('/type0', 'App\Http\Controllers\PostsController@type0');
 Route::get('/type1', 'App\Http\Controllers\PostsController@type1');
 Route::get('/type2', 'App\Http\Controllers\PostsController@type2');
@@ -66,4 +66,9 @@ Route::post('/account/edit','App\Http\Controllers\AccountController@edit')->midd
 
 Route::get('/bulletin','App\Http\Controllers\BulletinController@index')->middleware('verified','active','admin');
 Route::post('/bulletin/p','App\Http\Controllers\BulletinController@edit')->middleware('verified','active','admin');
+
+Route::get('/rules','App\Http\Controllers\RulesController@page')->middleware('verified','active','admin');
+Route::post('/rules/p','App\Http\Controllers\RulesController@edit')->middleware('verified','active','admin');
+
+
 
