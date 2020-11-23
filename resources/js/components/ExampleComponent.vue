@@ -34,8 +34,13 @@
                 },
             decreaseValue: function() {
                 var value = this.amt;
-                value--;
-                this.amt = value;
+                if(value>0){
+                    value--;
+                    this.amt = value;
+                }
+                else{
+                    this.amt = value;
+                }
                 }
         },
         computed: {

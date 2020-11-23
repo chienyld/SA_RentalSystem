@@ -1942,8 +1942,13 @@ __webpack_require__.r(__webpack_exports__);
     },
     decreaseValue: function decreaseValue() {
       var value = this.amt;
-      value--;
-      this.amt = value;
+
+      if (value > 0) {
+        value--;
+        this.amt = value;
+      } else {
+        this.amt = value;
+      }
     }
   },
   computed: {
